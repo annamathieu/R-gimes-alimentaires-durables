@@ -1,0 +1,148 @@
+﻿r_eco,nom_pays,code_pays,continent
+HIC,Australia,AUS,WPR
+HIC,Austria,AUT,EUR
+HIC,Belgium and Luxembourg,BLX,EUR
+HIC,Canada,CAN,AMR
+HIC,Croatia,HRV,EUR
+HIC,Cyprus,CYP,EUR
+HIC,Czech Republic,CZE,EUR
+HIC,Denmark,DNK,EUR
+HIC,Finland,FIN,EUR
+HIC,France,FRA,EUR
+HIC,Germany,DEU,EUR
+HIC,Greece,GRC,EUR
+HIC,Hungary,HUN,EUR
+HIC,Iceland,ISL,EUR
+HIC,Ireland,IRL,EUR
+HIC,Israel,ISR,EMR
+HIC,Italy,ITA,EUR
+HIC,Japan,JPN,WPR
+HIC,Netherlands,NLD,EUR
+HIC,New Zealand,NZL,WPR
+HIC,Norway,NOR,EUR
+HIC,Other Caribbean,CRB,AMR
+HIC,Other Southeast Asia,OSA,SEA
+HIC,Poland,POL,EUR
+HIC,Portugal,PRT,EUR
+HIC,Republic of Korea,KOR,WPR
+HIC,Rest of Arab Peninsula,RAP,EMR
+HIC,Saudi Arabia,SAU,EMR
+HIC,Slovakia,SVK,EUR
+HIC,Slovenia,SVN,EUR
+HIC,Spain,ESP,EUR
+HIC,Sweden,SWE,EUR
+HIC,Switzerland,CHE,EUR
+HIC,United Kingdom,GBR,EUR
+HIC,United States of America,USA,AMR
+UMC,Botswana,BWA,AFR
+UMC,Algeria,DZA,AFR
+UMC,Gabon,GAB,AFR
+UMC,Namibia,NAM,AFR
+UMC,South Africa,ZAF,AFR
+UMC,Argentina,ARG,AMR
+UMC,Brazil,BRA,AMR
+UMC,Chile,CHL,AMR
+UMC,Colombia,COL,AMR
+UMC,Costa Rica,CRI,AMR
+UMC,Cuba,CUB,AMR
+UMC,Dominican Republic,DOM,AMR
+UMC,Jamaica,JAM,AMR
+UMC,Mexico,MEX,AMR
+UMC,Panama,PAN,AMR
+UMC,Peru,PER,AMR
+UMC,Uruguay,URY,AMR
+UMC,Venezuela (Bolivarian Republic of),VEN,AMR
+UMC,Lebanon,LBN,EMR
+UMC,Libya,LBY,EMR
+UMC,Bulgaria,BGR,EUR
+UMC,Belarus,BLR,EUR
+UMC,Baltic States,BLT,EUR
+UMC,Kazakhstan,KAZ,EUR
+UMC,Other Balkans,OBN,EUR
+UMC,Romania,ROU,EUR
+UMC,Russian Federation,RUS,EUR
+UMC,Fiji,FJI,WPR
+UMC,Malaysia,MYS,WPR
+UMC,Other Pacific Ocean,OPO,WPR
+LMC,Angola,AGO,AFR
+LMC,Cote_Ivoire,CIV,AFR
+LMC,Cameroon,CMR,AFR
+LMC,Lesotho,LSO,AFR
+LMC,Nigeria,NGA,AFR
+LMC,Other Atlantic Ocean,OAO,AMR
+LMC,Other Indian Ocean,OIO,SEA
+LMC,Swaziland,SWZ,AFR
+LMC,Belize,BLZ,AMR
+LMC,Bolivia (Plurinational State of),BOL,AMR
+LMC,Ecuador,ECU,AMR
+LMC,Guyanas South America,GSA,AMR
+LMC,Guatemala,GTM,AMR
+LMC,Honduras,HND,AMR
+LMC,Nicaragua,NIC,AMR
+LMC,Paraguay,PRY,AMR
+LMC,El Salvador,SLV,AMR
+LMC,Djibouti,DJI,EMR
+LMC,Egypt,EGY,EMR
+LMC,Iran (Islamic Republic of),IRN,EMR
+LMC,Jordan,JOR,EMR
+LMC,Pakistan,PAK,SEA
+LMC,Sudan,SDN,AFR
+LMC,Syrian Arab Republic,SYR,EMR
+LMC,Tunisia,TUN,EMR
+LMC,Albania,ALB,EUR
+LMC,Armenia,ARM,EUR
+LMC,Azerbaijan,AZE,EUR
+LMC,Georgia,GEO,EUR
+LMC,Republic of Moldova,MDA,EUR
+LMC,Turkmenistan,TKM,EUR
+LMC,Ukraine,UKR,EUR
+LMC,Bhutan,BTN,SEA
+LMC,Indonesia,IDN,SEA
+LMC,India,IND,SEA
+LMC,Sri Lanka,LKA,SEA
+LMC,Thailand,THA,SEA
+LMC,Timor-Leste,TLS,SEA
+LMC,China,CHN,WPR
+LMC,Mongolia,MNG,WPR
+LMC,Philippines,PHL,WPR
+LMC,Papua New Guinea,PNG,WPR
+LIC,Burundi,BDI,AFR
+LIC,Benin,BEN,AFR
+LIC,Burkina Faso,BFA,AFR
+LIC,Central African Republic,CAF,AFR
+LIC,Congo,COG,AFR
+LIC,Eritrea,ERI,AFR
+LIC,Ethiopia,ETH,AFR
+LIC,Ghana,GHA,AFR
+LIC,Guinea,GIN,AFR
+LIC,Gambia,GMB,AFR
+LIC,Guinea-Bissau,GNB,AFR
+LIC,Kenya,KEN,AFR
+LIC,Liberia,LBR,AFR
+LIC,Madagascar,MDG,AFR
+LIC,Mali,MLI,AFR
+LIC,Mozambique,MOZ,AFR
+LIC,Mauritania,MRT,AFR
+LIC,Malawi,MWI,AFR
+LIC,Niger,NER,AFR
+LIC,Senegal,SEN,AFR
+LIC,Sierra Leone,SLE,AFR
+LIC,Chad,TCD,AFR
+LIC,Togo,TGO,AFR
+LIC,United Republic of Tanzania,TZA,AFR
+LIC,Uganda,UGA,AFR
+LIC,Zambia,ZMB,AFR
+LIC,Zimbabwe,ZWE,AFR
+LIC,Haiti,HTI,AMR
+LIC,Afghanistan,AFG,EMR
+LIC,Yemen,YEM,EMR
+LIC,Kyrgyzstan,KGZ,EUR
+LIC,Tajikistan,TJK,EUR
+LIC,Uzbekistan,UZB,EUR
+LIC,Bangladesh,BGD,SEA
+LIC,Myanmar,MMR,SEA
+LIC,Nepal,NPL,SEA
+LIC,Cambodia,KHM,WPR
+LIC,Lao People's Democratic Republic,LAO,WPR
+LIC,Solomon Islands,SLB,WPR
+LIC,Viet Nam,VNM,WPR
