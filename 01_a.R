@@ -7,7 +7,7 @@ library(tidyr)
 # Importation des trois tableaux 
 nutri <- read.table(file = "data_csv/nutri.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
 sante <- read.table(file = "data_csv/sante.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
-sante <- read.table(file = "data_csv/env.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
+env <- read.table(file = "data_csv/env.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
 conti<- read.table(file = "data_csv/conti.csv", header = T, sep=",", stringsAsFactors = T)
 
 # Vérification des data types 
