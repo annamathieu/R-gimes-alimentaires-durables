@@ -79,7 +79,7 @@ studiedcountries <- function(data = world_new, conti, country = NULL, reg_eco = 
   
   # filtre sur les conti, pays, r eco 
   if (!is.null(country)) {f_conti <- conti %>% filter(nom_pays %in% country) }
-  else if (!is.null(reg_eco)) {f_conti <- conti %>% filter(reg_eco %in% r_eco) }
+  else if (!is.null(reg_eco)) {f_conti <- conti %>% filter(r_eco %in% reg_eco) }
   else { f_conti <- conti }
   
   if (!is.null(contin)) {world <- world %>% filter(region_un %in% contin) }
@@ -115,11 +115,11 @@ studiedcountries <- function(data = world_new, conti, country = NULL, reg_eco = 
   return(map) 
 }
 
-# tests qui fonctionnent :)
-studiedcountries(data = world_new, conti)   # appel classique de la fonction : marche 
-studiedcountries(data = world_new, conti, contin = "Asia")   # appel de la fonction avec affichage d'un seul continent
-
-
+# # tests qui fonctionnent :)
+# studiedcountries(data = world_new, conti)                                         # appel classique de la fonction : marche 
+# studiedcountries(data = world_new, conti, contin = "Asia")                        # appel de la fonction avec affichage d'un seul continent
+# studiedcountries(data = world_new, conti, country = "France", contin = "Europe")  # visualiser un continent d'une région
+studiedcountries(data = world_new, conti, contin = "Europe", reg_eco = "HIC")       # visualiser les pays d'une région éco d'un continent 
 
 
 
