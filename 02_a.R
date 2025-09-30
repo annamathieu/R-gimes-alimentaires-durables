@@ -76,6 +76,7 @@ studiedcountries <- function(data = world_new, conti, country = NULL, reg_eco = 
 studiedcountries <- function(data = world_new, conti, country = NULL, reg_eco = NULL, contin= NULL) {
   # objet de la classe sf 
   world <- ne_countries(scale = "medium", returnclass = "sf")
+  world$region_un <- as.factor(world$region_un)
   
   # filtre sur les conti, pays, r eco 
   if (!is.null(country)) {f_conti <- conti %>% filter(nom_pays %in% country) }
