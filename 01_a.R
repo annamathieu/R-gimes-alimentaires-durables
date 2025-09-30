@@ -51,8 +51,16 @@ sante_new <- sante_new[-which(sante_new$stats %in% c("low", "high")) , ]   # gar
 sante_new <- sante_new[,-5]
 
 
-
-
 # analyse des valeurs manquantes 
+
+
+
+
+
+
+
+
+
+
 
 
