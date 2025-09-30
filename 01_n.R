@@ -36,27 +36,34 @@ nutri_new <- nutri_new[,-3] # supprimer colonne stats (1 seul level)
 
 
 head(nutri_new)
-# Filtrer uniquement la France
-nutri_FR <- nutri_new %>% filter(code_pays == "FRP")
+
+
+##############################################################
 library(ggplot2)
-library(tidyr)
 
-# Filtrer France et ne garder que la colonne protein + scénario
-proteine_FR <- nutri_FR %>% select(diet.scenario, protein)
-
-# Exemple : AJR protéines adultes ~ 50 g/jour
-proteine_FR <- proteine_FR %>%
-  mutate(protein_pct_ajr = protein / 50 * 100)
-
-proteine_FR_summary <- proteine_FR %>%
-  group_by(diet.scenario) %>%
-  summarise(protein_mean = mean(protein_pct_ajr, na.rm = TRUE))
-
-ggplot(proteine_FR_summary, aes(x = diet.scenario, y = protein_mean, fill = diet.scenario)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Moyenne de couverture en protéines (% AJR) - France",
-       x = "Scénario alimentaire", y = "Protéines (% AJR)") +
+ggplot(
+  data = subset(nutri_new, code_pays == "FRP" & item == "%rec"),
+  aes(x = diet.scenario, 
+      y = protein, 
+      fill = protein)) +   
+  geom_col() +
+  geom_hline(yintercept = 100, 
+             linetype = "solid", 
+             color = "red", 
+             size = 1) +
+  scale_fill_gradient(low = "plum1", high = "purple4") + # gradient clair → foncé
+  labs(
+    title = "Apport en protéines selon le régime alimentaire (France)",
+    x = "Régime Alimentaire",
+    y = "% de la recommandation"
+  ) +
   theme_minimal() +
-  geom_hline(yintercept = 100, linetype = "dashed", color = "red") +
-  theme(legend.position = "none")
+  theme(legend.position = "none")  # pas besoin de légende ici
+
+
+
+
+
+
+
 
