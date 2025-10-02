@@ -1,11 +1,4 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
+
 
 library(shiny)
 
@@ -25,6 +18,7 @@ server <- function(input, output, session) {
   
   
   # Filtrage des données 'conti' selon le continent sélectionné
+  
   filtered_data <- reactive({
     req(input$continent)
     
@@ -35,7 +29,6 @@ server <- function(input, output, session) {
     # Filtrage de conti
     conti[conti$continent %in% continent_codes, ]
   })
-  
   
   # Mise à jour dynamique des pays et régions économiques
   observe({
@@ -63,4 +56,3 @@ server <- function(input, output, session) {
     selected_data()
   })
 }
-
