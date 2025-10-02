@@ -15,9 +15,9 @@ library(RColorBrewer)       # palettes de couleur
 world <- ne_countries(scale = "medium", returnclass = "sf")
 world$region_un <- as.factor(world$region_un)
 
-nutri <- read.table(file = "data_csv/nutri.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
-sante <- read.table(file = "data_csv/sante.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
-env <- read.table(file = "data_csv/env.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
+nutri_new <- read.table(file = "data_csv/nutri_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
+sante_new <- read.table(file = "data_csv/sante_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
+env_new <- read.table(file = "data_csv/env_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
 conti<- read.table(file = "data_csv/conti.csv", header = T, sep=",", stringsAsFactors = T)
 
 
