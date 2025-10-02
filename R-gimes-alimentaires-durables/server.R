@@ -10,26 +10,45 @@
 library(shiny)
 
 # Define server logic required to draw a histogram
-function(input, output, session) {
-  # Réactif qui filtre world_new selon le continent sélectionné
+
+
+server <- function(input, output, session) {
+  
+  continent_map <- c(
+    "Africa"     = "AFR",
+    "Americas"   = "AMR",
+    "Asia"       = "SEA",  # ← à adapter selon ce que tu veux (SEA ? WPR ? EMR ?)
+    "Europe"     = "EUR",
+    "Oceania"    = "WPR",  # ← à adapter
+    "Antarctica" = NA      # pas dans `conti`, donc on ignore
+  )
+  
+  
+  # Filtrage des données 'conti' selon le continent sélectionné
   filtered_data <- reactive({
     req(input$continent)
-    world[world$region_un %in% input$continent, ]
+    
+    # Obtenir les codes de `conti` à partir des continents sélectionnés
+    continent_codes <- continent_map[input$continent]
+    continent_codes <- na.omit(continent_codes)  # on enlève les NA (ex: Antarctica)
+    
+    # Filtrage de conti
+    conti[conti$continent %in% continent_codes, ]
   })
   
-  # Met à jour dynamiquement les pays en fonction du continent
-  observeEvent(input$continent, {
+  
+  # Mise à jour dynamique des pays et régions économiques
+  observe({
+    req(filtered_data())
+    
     updatePickerInput(session, "country",
-                      choices = as.list(levels(factor(filtered_data()$nom_pays))))
-  })
-  
-  # Met à jour dynamiquement les régions économiques
-  observeEvent(input$continent, {
+                      choices = sort(unique(filtered_data()$nom_pays)))
+    
     updatePickerInput(session, "reg_eco",
-                      choices = as.list(levels(factor(filtered_data()$nom_pays))))
+                      choices = sort(unique(filtered_data()$r_eco)))
   })
   
-  # Utilise les valeurs sélectionnées pour appeler la fonction
+  # Données sélectionnées en fonction des filtres
   selected_data <- reactive({
     studiedcountries(
       conti = conti,
@@ -43,5 +62,5 @@ function(input, output, session) {
   output$map <- renderLeaflet({
     selected_data()
   })
-
 }
+
