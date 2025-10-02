@@ -10,19 +10,57 @@
 library(shiny)
 
 # Define server logic required to draw a histogram
-function(input, output, session) {
 
-    output$distPlot <- renderPlot({
 
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-
-    })
-
+server <- function(input, output, session) {
+  
+  continent_map <- c(
+    "Africa"     = "AFR",
+    "Americas"   = "AMR",
+    "Asia"       = "SEA",  # ← à adapter selon ce que tu veux (SEA ? WPR ? EMR ?)
+    "Europe"     = "EUR",
+    "Oceania"    = "WPR",  # ← à adapter
+    "Antarctica" = NA      # pas dans `conti`, donc on ignore
+  )
+  
+  
+  # Filtrage des données 'conti' selon le continent sélectionné
+  filtered_data <- reactive({
+    req(input$continent)
+    
+    # Obtenir les codes de `conti` à partir des continents sélectionnés
+    continent_codes <- continent_map[input$continent]
+    continent_codes <- na.omit(continent_codes)  # on enlève les NA (ex: Antarctica)
+    
+    # Filtrage de conti
+    conti[conti$continent %in% continent_codes, ]
+  })
+  
+  
+  # Mise à jour dynamique des pays et régions économiques
+  observe({
+    req(filtered_data())
+    
+    updatePickerInput(session, "country",
+                      choices = sort(unique(filtered_data()$nom_pays)))
+    
+    updatePickerInput(session, "reg_eco",
+                      choices = sort(unique(filtered_data()$r_eco)))
+  })
+  
+  # Données sélectionnées en fonction des filtres
+  selected_data <- reactive({
+    studiedcountries(
+      conti = conti,
+      contin = input$continent,
+      country = input$country,
+      reg_eco = input$reg_eco
+    )
+  })
+  
+  # Affichage de la carte
+  output$map <- renderLeaflet({
+    selected_data()
+  })
 }
+

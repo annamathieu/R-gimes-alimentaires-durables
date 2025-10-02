@@ -79,11 +79,17 @@ studiedcountries <- function(conti, country = NULL, reg_eco = NULL, contin= NULL
   world$region_un <- as.factor(world$region_un)
   
   # filtre sur les conti, pays, r eco 
-  if (!is.null(country)) {f_conti <- conti %>% filter(nom_pays %in% country) }
-  else if (!is.null(reg_eco)) {f_conti <- conti %>% filter(r_eco %in% reg_eco) }
-  else { f_conti <- conti }
+  f_conti <- conti
   
-  if (!is.null(contin)) {world <- world %>% filter(region_un %in% contin) }
+  if (!is.null(contin)) {
+    f_conti <- f_conti %>% filter(continent %in% contin)
+  }
+  if (!is.null(reg_eco)) {
+    f_conti <- f_conti %>% filter(r_eco %in% reg_eco)
+  }
+  if (!is.null(country)) {
+    f_conti <- f_conti %>% filter(nom_pays %in% country)
+  }
   
   
   # fusion avec les données de continent et R eco 
