@@ -29,12 +29,18 @@ nutri_new <- nutri_new[-ends_with( "LMIC", vars = nutri_new$region) , ]
 nutri_new <- rename(nutri_new, 
                     code_pays=region)
 
-
-
 # pivot wider de nutri 
 nutri_new <- pivot_wider(data = nutri_new, names_from = nutrient, values_from = value)
 nutri_new <- nutri_new[-which(nutri_new$stats %in% c("low", "high")) , ]   # garder que les moyennes
 nutri_new <- nutri_new[,-3] # supprimer colonne stats (1 seul level)
+
+# ajout d'une colonne "grp_diet" de classe de type de scénario de diet 
+nutri_new <- nutri_new %>%
+  mutate(grp_diet = case_when(
+    diet.scenario %in% c("FLX", "PSC", "VEG", "VGN") ~ "vg",
+    diet.scenario %in% c("ani-25", "ani-50", "ani-75", "ani-100") ~ "ani", 
+    diet.scenario %in% c("kcal-25", "kcal-50", "kcal-75", "kcal-100") ~ "kcal", 
+    TRUE ~ "bmk"))
 
 write.csv(nutri_new, file="data_csv/nutri_new.csv")
 
