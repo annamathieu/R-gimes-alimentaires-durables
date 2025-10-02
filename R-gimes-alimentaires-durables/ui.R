@@ -76,7 +76,7 @@ fluidPage(
                  pickerInput(
                    inputId = "continent", 
                    label = "Continent",
-                   choices = levels(factor(world$region_un)), # valeurs initiales
+                   choices = sort(unique(world$region_un)), #levels(factor(world$region_un)), # valeurs initiales
                    selected = "Africa",
                    options = pickerOptions(
                      actionsBox = TRUE,
@@ -87,7 +87,7 @@ fluidPage(
                    multiple = TRUE
                  ),
                  
-                 h4("Pays", class = "mt-3 mb-2 text-secondary"),
+                 #h4("Pays", class = "mt-3 mb-2 text-secondary"),
                  pickerInput(
                    inputId = "country", 
                    label = "Pays", 
@@ -101,7 +101,7 @@ fluidPage(
                    multiple = TRUE
                  ),
                  
-                 h4("Région économique", class = "mt-3 mb-2 text-secondary"),
+                 #h4("Région économique", class = "mt-3 mb-2 text-secondary"),
                  pickerInput(
                    inputId = "reg_eco", 
                    label = "Région économique", 
