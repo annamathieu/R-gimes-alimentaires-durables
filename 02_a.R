@@ -117,10 +117,10 @@ studiedcountries <- function(conti, country = NULL, reg_eco = NULL, contin= NULL
 }
 
 # # tests qui fonctionnent :)
-# studiedcountries(conti)                                         # appel classique de la fonction : marche 
-# studiedcountries(conti, contin = "Asia")                        # appel de la fonction avec affichage d'un seul continent
-# studiedcountries(conti, country = "France", contin = "Europe")  # visualiser un continent d'une région
-# studiedcountries(conti, contin = "Europe", reg_eco = "HIC")       # visualiser les pays d'une région éco d'un continent 
+studiedcountries(conti)                                         # appel classique de la fonction : marche 
+studiedcountries(conti, contin = "Asia")                        # appel de la fonction avec affichage d'un seul continent
+studiedcountries(conti, country = "France", contin = "Europe")  # visualiser un continent d'une région
+studiedcountries(conti, contin = "Europe", reg_eco = "HIC")       # visualiser les pays d'une région éco d'un continent 
 # 
 
 

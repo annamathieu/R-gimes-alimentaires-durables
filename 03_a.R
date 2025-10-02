@@ -53,36 +53,27 @@ all.diet <- function(nutrim = "protein") {
 }
 
 all.diet()
-all.diet("vitaminB12")
+b12_all <- all.diet("vitaminB12")
+prot_all <- all.diet("protein")
+
+(b12_all + prot_all)
 
 
-# Fonction de combinaison de graph 
-combine.graph <- function (nutriments) {
-  for (i in 1:length(nutriments)){
-    res[[i]] <- all.diet(nutriments[i])
-  }
-    
-  
-  
-}
 
 
-graphs <- map(nutriments, ~ by.diet(diet = "FLX", diet2 = "BMK", nutrim = .x))
 
-# Combiner avec patchwork
-combined_graph <- wrap_plots(graphs, ncol = 2)  # 2 colonnes par exemple
-combined_graph
 
 
 # POUR un SEUL régime à la fois et tous les nutriments 
 
 by.diet <- function(diet="FLX", diet2 = "BMK", nutrim = "protein") {
   
+  nutri_new <- nutri_new %>% filter((code_pays=="FRP") & (nutri_new$item=="%rec") & (nutri_new$diet.scenario %in% c(diet, diet2)))
+  
   y_min <- min(nutri_new[[nutrim]], na.rm = TRUE)
   y_min <- y_min - 5
   
   graph <- nutri_new %>% 
-    filter((code_pays=="FRP") & (nutri_new$item=="%rec") & (nutri_new$diet.scenario %in% c(diet, diet2)))  %>% 
     ggplot() +
     aes(diet.scenario, .data[[nutrim]], fill = grp_diet, group = grp_diet) +
     geom_bar(stat= "identity", position = position_dodge())+
@@ -97,7 +88,7 @@ by.diet <- function(diet="FLX", diet2 = "BMK", nutrim = "protein") {
     theme(text = element_text(size = 10),
           axis.text.x = element_text(angle = 45, hjust = 1),
           title = element_text(size = 9)) +
-    scale_y_continuous(limits = c(y_min, 100)) +
+    scale_y_continuous(limits = c(ifelse(y_min<0,y_min,0), 100)) +
     xlab ("Régime alimentaire") +
     geom_hline(yintercept = 100, 
                linetype = "dashed", 
@@ -108,6 +99,21 @@ by.diet <- function(diet="FLX", diet2 = "BMK", nutrim = "protein") {
   
 }
 
-by.diet(diet="VGN", diet2 = "BMK", nutrim = "vitaminB12")  
-# pb marge   
+by.diet()  
+# pb marge 
+
+
+list= c("protein", "vitaminB12")
+graphics <- seq(length(list))
+
+
+for (i in list) {
+  graphics[i] <- by.diet( nutrim = i  )
+}
+
+
+  
+
+combinaison()
+
   
