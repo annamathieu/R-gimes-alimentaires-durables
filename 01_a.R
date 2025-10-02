@@ -72,6 +72,13 @@ sante_new <- pivot_wider(data = sante_new, names_from = risk.factor, values_from
 sante_new <- sante_new[-which(sante_new$stats %in% c("low", "high")) , ]   # garder que les moyenne
 sante_new <- sante_new[,-5]
 
+sante_new <- sante_new %>%
+  mutate(grp_diet = case_when(
+    diet.scenario %in% c("FLX", "PSC", "VEG", "VGN") ~ "vg",
+    diet.scenario %in% c("ani-25", "ani-50", "ani-75", "ani-100") ~ "ani", 
+    diet.scenario %in% c("kcal-25", "kcal-50", "kcal-75", "kcal-100") ~ "kcal", 
+    TRUE ~ "bmk"))
+
 write.csv(sante_new, file="data_csv/sante_new.csv")
 
 
