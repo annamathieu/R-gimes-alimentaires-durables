@@ -11,18 +11,37 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 function(input, output, session) {
-
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-
-    })
+  # Réactif qui filtre world_new selon le continent sélectionné
+  filtered_data <- reactive({
+    req(input$continent)
+    world[world$region_un %in% input$continent, ]
+  })
+  
+  # Met à jour dynamiquement les pays en fonction du continent
+  observeEvent(input$continent, {
+    updatePickerInput(session, "country",
+                      choices = as.list(levels(factor(filtered_data()$nom_pays))))
+  })
+  
+  # Met à jour dynamiquement les régions économiques
+  observeEvent(input$continent, {
+    updatePickerInput(session, "reg_eco",
+                      choices = as.list(levels(factor(filtered_data()$nom_pays))))
+  })
+  
+  # Utilise les valeurs sélectionnées pour appeler la fonction
+  selected_data <- reactive({
+    studiedcountries(
+      conti = conti,
+      contin = input$continent,
+      country = input$country,
+      reg_eco = input$reg_eco
+    )
+  })
+  
+  # Affichage de la carte
+  output$map <- renderLeaflet({
+    selected_data()
+  })
 
 }
