@@ -18,75 +18,29 @@
 # DEF COULEURS GRP DIET 
 ######################################################################
 
-levels(nutri_new$diet.scenario)
+# ALLER DANS GLOBAL POUR CHANGER LES COULEURS 
 
-colors.scenario <- c("mistyrose",  # ani-100
-                     "brown4",        # ani 25
-                     "indianred3",    # ani 50
-                     "pink2",          # ani 75
-                     "gray28",     # BMK 
-                     "olivedrab2",  # FLX
-                     "darkorange4", # kcal 100
-                     "orange",      # kcal 25
-                     "darkorange2",  # kcal 50
-                     "darkorange3",  # kcal 75
-
-                     "chartreuse3", "forestgreen", "darkgreen") # "PSC"      "VEG"      "VGN" 
-
-
-names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75", 
-                           "BMK", 
-                           "FLX", 
-                           "kcal-100", "kcal-25", 
-                           "kcal-50" , "kcal-75", 
-                           "PSC", "VEG", "VGN"
-                           )
-
-
-######################################################################
-# ALL DIET
-######################################################################
-
-# tous les régimes alimentaires simultanément POUR UN NUTRIMENT 
-
-all.diet <- function(nutrim = "protein", country = "FRP", ) {
-  
-  # filter sur pays; nutriments 
-  nutri_new %>% filter((code_pays==country) & (nutri_new$item=="%rec"))
-  
-  #définition des axes y min et max 
-  y_min <- min(nutri_new[[nutrim]]) - 10   # axe Y min (si < 0)
-  y_max <- max(nutri_new[[nutrim]]) + 10   # axe y min pour si > à 100 %
-  
-  nutri_new %>% 
-    ggplot() +
-    aes(diet.scenario, .data[[nutrim]], fill = diet.scenario, group = grp_diet) +
-    geom_bar(stat= "identity", position = position_dodge())+
-    geom_text(aes(y = .data[[nutrim]], 
-                  label = round(.data[[nutrim]],0),
-                  group =grp_diet), 
-              color = "black", 
-              size = 4,
-              vjust = 1) +
-    labs(fill = "Groupe de \nscénario \nrégime \nalimentaire", 
-         title = "% de couverture des protéines par le régime alimentaire \npar rapport aux recommandations nutritionnelles") + 
-    theme(text = element_text(size = 10),
-          axis.text.x = element_text(angle = 45, hjust = 1),
-          title = element_text(size = 9), 
-          legend = F) +
-    xlab ("Régime alimentaire") +
-    geom_hline(yintercept = 100, 
-               linetype = "dashed", 
-               color = "black", 
-               linewidth = 0.8)
-  
-  return(graph )
-}
-
-all.diet(nutrim = "vitaminB12")
-
-######################################################################
-
+# colors.scenario <- c("mistyrose",  # ani-100
+#                      "brown4",        # ani 25
+#                      "indianred3",    # ani 50
+#                      "pink2",          # ani 75
+#                      "gray28",     # BMK 
+#                      "olivedrab2",  # FLX
+#                      "darkorange4", # kcal 100
+#                      "orange",      # kcal 25
+#                      "darkorange2",  # kcal 50
+#                      "darkorange3",  # kcal 75
+#                      
+#                      "chartreuse3", "forestgreen", "darkgreen") # "PSC"      "VEG"      "VGN" 
+# 
+# 
+# names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75", 
+#                            "BMK", 
+#                            "FLX", 
+#                            "kcal-100", "kcal-25", 
+#                            "kcal-50" , "kcal-75", 
+#                            "PSC", "VEG", "VGN") 
+#                            
 
 
 
@@ -180,10 +134,10 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
   }
 
 # test partition diet 
-# partition.bydiet_f(ncol = 2)  
-# partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
-# partition.bydiet_f(regimes = "BMK")
-
+partition.bydiet_f(ncol = 2, country = "CAN")  
+partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
+partition.bydiet_f(regimes = "BMK")
+partition.bydiet_f(nutriments = "protein", ncol = 1)
   
 ###############################################################################  
 

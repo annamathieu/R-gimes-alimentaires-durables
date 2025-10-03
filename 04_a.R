@@ -1,9 +1,23 @@
-### Impact environnemental
+### PCA SUR LES DONNEES DE NUTRITION 
+# ONGLET DE LA PAGE " NUTRITION " 
+
+# jeu de données nutri_new 
 
 
-library(tidyverse)
-library(dplyr)
+  pca_data_nutri <- nutri_new %>% filter(item == "abs") 
+  pca_data_nutri <- pca_data_nutri[,-c(1:2)]
 
-sante <- read.table(file = "data_csv/sante.csv", header = T, sep =";", stringsAsFactors = T, dec = ",")
+  pca_res_nutri <- PCA(X = pca_data_nutri, 
+                       quali.sup = c(1,2,27))
+  
+  plot.PCA(pca_res_nutri, choix = "ind", habillage = 2, label = "none", legend = F )
+  
+  
+  
+pca.nutri <- function () {
+  
 
-str(sante)
+  
+  
+  
+}
