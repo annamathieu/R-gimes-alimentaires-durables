@@ -88,7 +88,11 @@ fluidPage(
                    inputId = "continent", 
                    label = "Continent",
                    choices = sort(unique(world$region_un)), #levels(factor(world$region_un)), # valeurs initiales
+<<<<<<< HEAD
                    # selected = "Africa",
+=======
+                   #selected = "Africa",
+>>>>>>> 01aada5f1c24952e87f38fefa025964939fd7a55
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,

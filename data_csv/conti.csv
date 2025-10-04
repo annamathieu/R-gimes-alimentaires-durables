@@ -1,4 +1,4 @@
-﻿r_eco,nom_pays,code_pays,continent
+r_eco,nom_pays,code_pays,continent
 HIC,Australia,AUS,WPR
 HIC,Austria,AUT,EUR
 HIC,Belgium and Luxembourg,BLX,EUR
@@ -143,6 +143,6 @@ LIC,Bangladesh,BGD,SEA
 LIC,Myanmar,MMR,SEA
 LIC,Nepal,NPL,SEA
 LIC,Cambodia,KHM,WPR
-LIC,Lao People's Democratic Republic,LAO,WPR
+LIC,Lao_Peoples_Democratic_Republic,LAO,WPR
 LIC,Solomon Islands,SLB,WPR
 LIC,Viet Nam,VNM,WPR
