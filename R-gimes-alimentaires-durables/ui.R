@@ -1,8 +1,12 @@
+
+
 library(shiny)
 library(shinyWidgets)
 
 # Define UI for application that draws a histogram
 fluidPage(
+  
+  
   
   tags$style(HTML("
       @media (min-width: 768px) {
@@ -17,9 +21,18 @@ fluidPage(
       }
     ")),
   
+  # tags$head(
+  #   tags$style(HTML("
+  #     html, body, .tab-content, .tab-pane, .mainPanel {
+  #       height: 100% !important;
+  #     }
+  #   "))
+  # ),
+  
   # Application title
   #titlePanel("Sustainable diet"),
   
+  ######
   navbarPage(
     title = "Sustainable diet",
     tabPanel(title = "Accueil",
@@ -66,7 +79,7 @@ fluidPage(
                )
              )
     ),
-    tabPanel(title="Onglet 2", 
+    tabPanel(title="Studied Countries", 
              # Sidebar with a slider input for number of bins
              sidebarLayout(
                sidebarPanel(
@@ -75,7 +88,7 @@ fluidPage(
                    inputId = "continent", 
                    label = "Continent",
                    choices = sort(unique(world$region_un)), #levels(factor(world$region_un)), # valeurs initiales
-                   #selected = "Africa",
+                   # selected = "Africa",
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,
@@ -111,7 +124,7 @@ fluidPage(
                      size = 5
                    ), 
                    multiple = TRUE
-                 )
+                 ),
                ), 
                # Show a plot
                mainPanel(
@@ -122,8 +135,99 @@ fluidPage(
                  )
                ))
     ),
-    tabPanel(title="Onglet 3",
-             "Hereisthesummary"),
     
+    # onglets 1 et 2 
+    ########
+    
+    tabPanel(title="Nutritional aspects", 
+             
+             mainPanel(
+               width= 12, 
+               
+               
+               tabsetPanel(
+                 tabPanel("Data Manipulation",
+                          h3("Contenu de l'onglet 1"),
+                          p("Pas de sidebar ici")
+                 ),
+                 
+                 tabPanel("PCA"),
+                 
+                 tabPanel("Nutritional qualities of diets",
+                          sidebarLayout(
+                            sidebarPanel(
+                              width = 3,
+                              
+                              pickerInput(
+                                inputId = "paysnutri", 
+                                label = "Pays",
+                                selected= "FRP",
+                                choices = sort(unique(nutri_new$code_pays)), 
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select a studied country",
+                                  size = 5
+                                ), 
+                                multiple = FALSE  # On ne peut chosisir qu'un pays 
+                              ),
+                              
+                              pickerInput(
+                                inputId = "nutriments_nutri", 
+                                label = "Nutriment",
+                                selected = names(nutri_new[,5:14]),                                
+                                choices = names(nutri_new[,5:14]), 
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select one or more nutrients",
+                                  size = 5
+                                ), 
+                                multiple = TRUE
+                              ),
+                              
+                              pickerInput(
+                                inputId = "diets_nutri", 
+                                label = "Diets",
+                                selected = c("ani-100","ani-25","ani-50","ani-75","BMK","FLX","kcal-100","kcal-25","kcal-50" ,"kcal-75","PSC","VEG","VGN"),
+                                choices = levels(nutri_new$diet.scenario), 
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select one or more diets",
+                                  size = 5
+                                ), 
+                                multiple = TRUE
+                              ),
+                              
+                              pickerInput(
+                                inputId = "ncolnutri", 
+                                label = "Number of columns",
+                                selected = 3, 
+                                choices = c(1,2,3,4,5,6), 
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Pick the number of columns to display graphs",
+                                  size = 5
+                                ), 
+                                multiple = FALSE
+                              )
+                              
+                              
+                              
+                              
+                            ),
+                            mainPanel(
+                              tabPanel("Nutritional qualities of diets", plotOutput("plot", height = "600px")), 
+                              width = 9, 
+                            )
+                          )
+                 )
+               )
+               
+             )
+             
+    )
   )
 )
