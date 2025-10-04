@@ -20,6 +20,10 @@ env_partition <- function(domains = c("GHGe", "land", "water", "nitr", "phos"), 
                           ncol = 3,                                              # nombre de colonnes d'affichage
                           title = "Comparaison du % de changement de chaque indicateur environnemental par régime alimentaire") {
   
+  # Sécurisation ncol pour éviter l’erreur “argument non numérique…”
+  ncol <- as.integer(ncol)
+  if (is.na(ncol) || ncol < 1) ncol <- 1
+  
   # ordre d'affichage fixe
   bar_order <- c("BMK", "ani-25", "ani-50", "ani-75", "ani-100",
                  "kcal-25","kcal-50", "kcal-75", "kcal-100",

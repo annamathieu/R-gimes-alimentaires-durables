@@ -228,7 +228,73 @@ fluidPage(
                
              )
              
+    ),
+    
+    ###############################################################
+    # Onglet ENVIRONMENTAL ASPECTS
+    ###############################################################
+    
+    tabPanel("Environmental aspects",
+             sidebarLayout(
+               sidebarPanel(
+                 width = 3,
+                 
+                 pickerInput(
+                   inputId = "paysenv", 
+                   label = "Pays",
+                   selected = "FRP",
+                   choices = sort(unique(env_new$code_pays)),
+                   options = pickerOptions(
+                     actionsBox = TRUE,
+                     liveSearch = TRUE,
+                     noneSelectedText = "Sélectionnez un pays"
+                   ),
+                   multiple = FALSE
+                 ),
+                 
+                 pickerInput(
+                   inputId = "indicateurs_env",
+                   label = "Indicateurs environnementaux",
+                   selected = c("GHGe", "land", "water", "nitr", "phos"),
+                   choices = c("GHGe", "land", "water", "nitr", "phos"),
+                   options = pickerOptions(
+                     actionsBox = TRUE,
+                     liveSearch = TRUE,
+                     noneSelectedText = "Choisissez un ou plusieurs indicateurs"
+                   ),
+                   multiple = TRUE
+                 ),
+                 
+                 pickerInput(
+                   inputId = "diets_env",
+                   label = "Régimes alimentaires",
+                   selected = levels(env_new$diet.scenario),
+                   choices = levels(env_new$diet.scenario),
+                   options = pickerOptions(
+                     actionsBox = TRUE,
+                     liveSearch = TRUE,
+                     noneSelectedText = "Choisissez les régimes"
+                   ),
+                   multiple = TRUE
+                 ),
+                 
+                 pickerInput(
+                   inputId = "ncolenv",
+                   label = "Nombre de colonnes à afficher",
+                   selected = 3,
+                   choices = c(1, 2, 3, 4, 5),
+                   multiple = FALSE
+                 )
+               ),
+               
+               mainPanel(
+                 plotOutput("plot_env", height = "600px")
+               )
+             )
     )
+    
+    
+    
   )
 )
 
