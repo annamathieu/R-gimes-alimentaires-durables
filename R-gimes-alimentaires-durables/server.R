@@ -62,5 +62,53 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     selected_data()
   })
+  
+  
+  
+  
+  
+  ###############################################
+
+  # Données sélectionnées en fonction des filtres
+  sel_data_nutri <- reactive({
+    req(input$nutriments_nutri, input$paysnutri, input$diets_nutri)
+
+    partition.bydiet_f(
+      nutriments = input$nutriments_nutri,
+      country = input$paysnutri,
+      regimes = input$diets_nutri,
+      ncol = input$ncolnutri
+    )
+  })
+  
+  # 
+  # observe({
+  #   req(sel_data_nutri())
+  #   
+  #   updatePickerInput(session, "paysnutri",
+  #                     choices = sort(unique(filtered_data()$nom_pays)))
+  #   
+  #   updatePickerInput(session, "reg_eco",
+  #                     choices = sort(unique(filtered_data()$r_eco)))
+  # })
+  
+  # Affichage de la carte
+  output$plot <- renderPlot({
+    sel_data_nutri() 
+    # theme(legend.text = element_text(size = 15), 
+    #       legend.title = element_text(size = 15, face = "bold"), 
+    #       legend.position = "right")
+    
+  })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 

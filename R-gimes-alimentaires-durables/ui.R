@@ -1,5 +1,3 @@
-
-
 library(shiny)
 library(shinyWidgets)
 
@@ -77,7 +75,7 @@ fluidPage(
                    inputId = "continent", 
                    label = "Continent",
                    choices = sort(unique(world$region_un)), #levels(factor(world$region_un)), # valeurs initiales
-                   selected = "Africa",
+                   #selected = "Africa",
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,
@@ -129,4 +127,3 @@ fluidPage(
     
   )
 )
-
