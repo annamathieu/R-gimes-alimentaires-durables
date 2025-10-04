@@ -131,6 +131,13 @@ env_partition(domains = c("GHGe", "land", "water"))
 
 env_partition(country = "DEU")
 
+env_partition(
+  domains = "GHGe",                         
+  country = "FRP",                          
+  regimes = c("BMK", "ani-25", "FLX", "VGN"),  
+  ncol = 1                                  
+)
+
 
 
   
