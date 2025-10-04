@@ -6,13 +6,13 @@
 
 
 # librairies 
-library(sf)
-library(rnaturalearth)      # fournit données géographiques
-library(leaflet)            # interactives maps
-library(rnaturalearthdata)
-library(ggplot2)
-library(tidyr)              # pour les join            
-library(RColorBrewer)       # palettes de couleur 
+# library(sf)
+# library(rnaturalearth)      # fournit données géographiques
+# library(leaflet)            # interactives maps
+# library(rnaturalearthdata)
+# library(ggplot2)
+# library(tidyr)              # pour les join            
+# library(RColorBrewer)       # palettes de couleur 
 
 #####################################################################
 # carte du monde

@@ -63,6 +63,7 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
                                    regimes = levels(nutri_new$diet.scenario),          # choix des diets 
                                    ncol = 3,                                            # nb de colonnes du patchwork (3 par défaut )
                                    title = "Comparaison du % de couverture de chaque nutriment par régime alimentaire") {
+  ncol <- as.numeric(ncol)
   
   # ordre de la légende et des bars 
   bar_order <- c("BMK", "ani-25", "ani-50", "ani-75", "ani-100", "kcal-25","kcal-50", "kcal-75", "kcal-100", "FLX", "PSC","VEG","VGN")
@@ -83,6 +84,8 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
     y_min <- min(nutri_new[[nutrim]]) - 10   # axe Y min (si < 0)
     y_max <- max(nutri_new[[nutrim]]) + 10   # axe y min pour si > à 100 %
     
+    ylab = nutrim
+    
     graph <- nutri_new %>% 
       ggplot() +
       aes(x =factor(diet.scenario, levels = bar_order), 
@@ -92,15 +95,13 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
       geom_text(aes(y = .data[[nutrim]], 
                     label = round(.data[[nutrim]],0),
                     group =grp_diet), 
-                color = "black", 
-                size = 4,
+                color = "black", family= "bold", 
+                size = 5,
                 vjust = 1) +
-      # labs(fill = "Groupe de \nscénario \nrégime \nalimentaire", 
-      # title = "% de couverture des protéines par le régime alimentaire \npar rapport aux recommandations nutritionnelles") + 
-      theme(text = element_text(size = 10),
-            axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
-            title = element_text(size = 7), 
-            axis.title.y = element_text(size = 11, face = "bold"),
+      theme(text = element_text(size = 12),
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
+            title = element_text(size = 5, face = "plain", colour = "forestgreen"), 
+            axis.title.y = element_text(size = 13, face = "bold"),
             legend.position = "none") +
       scale_y_continuous(limits = c(ifelse(y_min<0,y_min,0), ifelse(y_max>100,y_max,100))) +
       scale_fill_manual(values = colors.scenario) +
@@ -108,8 +109,10 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
       geom_hline(yintercept = 100, 
                  linetype = "dashed", 
                  color = "black", 
-                 linewidth = 0.8) +
-      labs(fill = "Groupe de \nscénario \nrégime \nalimentaire") 
+                 linewidth = 1.2) +
+      labs(
+        fill = "Groupe de \nscénario \nrégime \nalimentaire", 
+           title = ylab, y = NULL) 
     
     return(graph)
   }
@@ -123,21 +126,30 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
   # Assembler avec patchwork et légende commune
   wrap_plots(graphics, ncol = ncol, guides = "collect") +
     plot_annotation(title = title) & 
-    theme(legend.position = "right",
-          plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
-          plot.subtitle = element_text(hjust = 0.5, size = 12),
+    theme(
+      # legend.position = "right",
+          plot.title = element_text(hjust = 0.5, face = "bold", size = 20, margin = margin(b = 15)),
           axis.title.x = element_blank(),
-          legend.text = element_text(size = 7), 
-          panel.background = element_rect(fill = "white")) 
+          panel.background = element_rect(fill = "grey95"), 
+          # plot.margin = margin(5, 15, 15, 5), 
+          
+          legend.text = element_text(size = 15, hjust = 1), 
+          legend.box.margin = margin(0, 30, 0, 0),
+          legend.title = element_text(size = 15, face = "bold"), 
+          legend.position = "right") +
+    
+    labs(fill = "Groupe de \nscénario \nrégime \nalimentaire")
+  
   
 
   }
 
 # test partition diet 
-partition.bydiet_f(ncol = 2, country = "CAN")  
-partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
-partition.bydiet_f(regimes = "BMK")
-partition.bydiet_f(nutriments = "protein", ncol = 1)
+partition.bydiet_f()
+# partition.bydiet_f(ncol = 2, country = "CAN")  
+# partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
+# partition.bydiet_f(regimes = "BMK")
+# partition.bydiet_f(nutriments = "protein", ncol = 1)
   
 ###############################################################################  
 
