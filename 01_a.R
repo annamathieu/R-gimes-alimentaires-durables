@@ -22,8 +22,8 @@ conti<- read.table(file = "data_csv/conti.csv", header = T, sep=",", stringsAsFa
 # suppression des régions : tout + régions eco seules + régions géo eco 
 
 # ⚠️ quelques NA a gérer au cas par cas 
-nutri_new <- left_join(nutri, conti, by = c("region" = "code_pays"))
-nutri_new <- nutri_new[-which(nutri$region %in% c("LMC",'UMC','HIC','LIC', 'all-r')) , ]
+# nutri_new <- left_join(nutri, conti, by = c("region" = "code_pays"))
+nutri_new <- nutri[-which(nutri$region %in% c("LMC",'UMC','HIC','LIC', 'all-r')) , ]
 nutri_new <- nutri_new[-ends_with( "LMIC", vars = nutri_new$region) , ]
 
 nutri_new <- rename(nutri_new, 
