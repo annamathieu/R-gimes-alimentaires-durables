@@ -1,4 +1,11 @@
-
+#
+# This is the server logic of a Shiny web application. You can run the
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    https://shiny.posit.co/
+#
 
 library(shiny)
 
@@ -18,7 +25,6 @@ server <- function(input, output, session) {
   
   
   # Filtrage des données 'conti' selon le continent sélectionné
-  
   filtered_data <- reactive({
     req(input$continent)
     
@@ -29,6 +35,7 @@ server <- function(input, output, session) {
     # Filtrage de conti
     conti[conti$continent %in% continent_codes, ]
   })
+  
   
   # Mise à jour dynamique des pays et régions économiques
   observe({
@@ -61,11 +68,11 @@ server <- function(input, output, session) {
   
   
   ###############################################
-
+  
   # Données sélectionnées en fonction des filtres
   sel_data_nutri <- reactive({
     req(input$nutriments_nutri, input$paysnutri, input$diets_nutri)
-
+    
     partition.bydiet_f(
       nutriments = input$nutriments_nutri,
       country = input$paysnutri,
@@ -104,3 +111,4 @@ server <- function(input, output, session) {
   
   
 }
+
