@@ -133,19 +133,19 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),           
           panel.background = element_rect(fill = "grey95"), 
           # plot.margin = margin(5, 15, 15, 5), 
           
-          legend.text = element_text(size = 15, hjust = 1), 
+          legend.text = element_text(size = 15), 
           # legend.box.margin = margin(0,0, 0, 0),
           legend.title = element_text(size = 15, face = "bold"), 
           legend.position = "right") +
     
-    labs(fill = "Groupe de \nscénario \nrégime \nalimentaire")
+    labs(fill = "Diet ")
   
   
 
   }
 
 # test partition diet 
-partition.bydiet_f()
+# partition.bydiet_f()
 # partition.bydiet_f(ncol = 2, country = "CAN")  
 # partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
 # partition.bydiet_f(regimes = "BMK")
