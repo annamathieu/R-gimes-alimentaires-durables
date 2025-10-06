@@ -41,3 +41,6 @@ source("RScripts/carto.R")
 
 # fonction pour avoir les graphs nutritionnels 
 source("RScripts/03_a.R")
+
+# fct DATA TABLE NUTRI 
+source("RScript/05_a.R")
