@@ -58,7 +58,7 @@
 # PARTITION DIET 
 ########################################################################################
 
-partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),              # choix des nutriments
+partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),              # choix des nutriments
                                    country = "FRP",                                     # choix du pays 
                                    regimes = levels(nutri_new$diet.scenario),          # choix des diets 
                                    ncol = 3,                                            # nb de colonnes du patchwork (3 par défaut )
@@ -145,7 +145,7 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:14]),           
   }
 
 # test partition diet 
-partition.bydiet_f()
+# partition.bydiet_f()
 # partition.bydiet_f(ncol = 2, country = "CAN")  
 # partition.bydiet_f(regimes = c("BMK", "ani-25", "ani-50", "ani-75", "ani-100"), ncol = 3)
 # partition.bydiet_f(regimes = "BMK")
