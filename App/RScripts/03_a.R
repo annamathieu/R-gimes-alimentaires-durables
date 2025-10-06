@@ -128,7 +128,7 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),           
     plot_annotation(title = title) & 
     theme(
       # legend.position = "right",
-          plot.title = element_text(hjust = 0.5, face = "bold", size = 20, margin = margin(b = 15)),
+          plot.title = element_text(hjust = 0.45, face = "bold", size = 20, margin = margin(b = 15)),
           axis.title.x = element_blank(),
           panel.background = element_rect(fill = "grey95"), 
           # plot.margin = margin(5, 15, 15, 5), 
