@@ -2,17 +2,7 @@
 
 
 # chargement des libraires
-library(DT)
-
-
-
-nutri_table <- nutri_new
-
-# Arrondir les valeurs à l'unité si colonnes type numériK 
-# num_cols <- sapply(nutri_table, is.numeric)
-
-nutri_table[, 4:27] <- round(nutri_table[, 4:27], 0)
-
+# library(DT)
 
 
 
