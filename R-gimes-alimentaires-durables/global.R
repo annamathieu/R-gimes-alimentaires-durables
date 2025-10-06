@@ -22,29 +22,19 @@ library(DT)                 # Data tables
 world <- ne_countries(scale = "medium", returnclass = "sf")
 world$region_un <- as.factor(world$region_un)
 
-nutri_new <- read.table(file = "data_csv/nutri_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
-sante_new <- read.table(file = "data_csv/sante_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
-env_new <- read.table(file = "data_csv/env_new.csv", header = T, sep =",", stringsAsFactors = T, dec = ".")
-conti<- read.table(file = "data_csv/conti.csv", header = T, sep=",", stringsAsFactors = T)
 
-colors.scenario <- c("mistyrose",  # ani-100
-                     "brown4",        # ani 25
-                     "indianred3",    # ani 50
-                     "pink2",          # ani 75
-                     "gray28",     # BMK 
-                     "olivedrab2",  # FLX
-                     "darkorange4", # kcal 100
-                     "orange",      # kcal 25
-                     "darkorange2",  # kcal 50
-                     "darkorange3",  # kcal 75
-                     
-                     "chartreuse3", "forestgreen", "darkgreen") # "PSC"      "VEG"      "VGN" 
+# import data
+nutri_new <- readRDS(file = "data/nutri_new.rds")
+sante_new <- readRDS(file = "data/sante_new.rds")
+env_new <- readRDS(file = "data/env_new.rds")
+conti<- readRDS(file = "data/conti.rds")
 
 
-names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75", 
-                           "BMK", 
-                           "FLX", 
-                           "kcal-100", "kcal-25", 
-                           "kcal-50" , "kcal-75", 
-                           "PSC", "VEG", "VGN") 
+# variables globales
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+world$region_un <- as.factor(world$region_un)
+
+# Charger les fonctions le dossier RScripts
+source("RScripts/carto.R")
 
