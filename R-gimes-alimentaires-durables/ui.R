@@ -92,7 +92,7 @@ fluidPage(
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,
-                     noneSelectedText = "Sélectionnez un continent",
+                     noneSelectedText = "Select one or more continents",
                      size = 5
                    ), 
                    multiple = TRUE
@@ -101,12 +101,12 @@ fluidPage(
                  #h4("Pays", class = "mt-3 mb-2 text-secondary"),
                  pickerInput(
                    inputId = "country", 
-                   label = "Pays", 
+                   label = "Country", 
                    choices = NULL, # rempli dynamiquement dans le serveur
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,
-                     noneSelectedText = "Sélectionnez un pays",
+                     noneSelectedText = "Select one or more countries",
                      size = 5
                    ), 
                    multiple = TRUE
@@ -115,12 +115,12 @@ fluidPage(
                  #h4("Région économique", class = "mt-3 mb-2 text-secondary"),
                  pickerInput(
                    inputId = "reg_eco", 
-                   label = "Région économique", 
+                   label = "Economical regions", 
                    choices = NULL, # rempli dynamiquement
                    options = pickerOptions(
                      actionsBox = TRUE,
                      liveSearch = TRUE,
-                     noneSelectedText = "Sélectionnez une région éco",
+                     noneSelectedText = "Select one or more economical regions",
                      size = 5
                    ), 
                    multiple = TRUE
@@ -196,7 +196,7 @@ fluidPage(
                               
                               pickerInput(
                                 inputId = "nutriments_nutri", 
-                                label = "Nutriment",
+                                label = "Nutrient",
                                 selected = names(nutri_new[,4:15]),                                
                                 choices = names(nutri_new[,4:27]), 
                                 options = pickerOptions(
@@ -248,8 +248,117 @@ fluidPage(
                  )
                )
     )
-             )
+             ),
+    
+    ###############################################################
+    # Onglet ENVIRONMENTAL ASPECTS
+    ###############################################################
+    
+    tabPanel(title="Environmental aspects",
              
+             mainPanel(
+               width = 12,
+               
+               tabsetPanel(
+                 tabPanel("Data Manipulation",
+                          
+                          sidebarLayout(
+                            sidebarPanel(   # side bar dans
+                              width = 2,
+                              h3("Use this tool bar to print environmental data"),
+                              
+                              # pickerInput(
+                              #   inputId = "columnsdatanutri",
+                              #   label = "Columns",
+                              #   choices = names(nutri_table),
+                              #   options = pickerOptions(
+                              #     actionsBox = TRUE,
+                              #     liveSearch = TRUE,
+                              #     noneSelectedText = "Select printed columns",
+                              #     size = 5
+                              #   ),
+                              #   multiple = TRUE  # plusieurs colonnes possibles
+                              # )
+                              
+                            ),
+                            
+                            mainPanel (
+                              # tabPanel("Data Manipulation",DTOutput("datatablenutri"))
+                              
+                              
+                            ))
+                 ),
+                 
+                 tabPanel("PCA"),
+                 
+                 tabPanel("Environmental data Vizualisation",
+                          sidebarLayout(
+                            sidebarPanel(
+                              width = 3,
+                              
+                              pickerInput(
+                                inputId = "paysenv", 
+                                label = "Country",
+                                selected = "FRP",
+                                choices = sort(unique(env_new$code_pays)),
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select one or more countries"
+                                ),
+                                multiple = FALSE
+                              ),
+                              
+                              pickerInput(
+                                inputId = "indicateurs_env",
+                                label = "Environmental indicators",
+                                selected = c("GHGe", "land", "water", "nitr", "phos"),
+                                choices = c("GHGe", "land", "water", "nitr", "phos"),
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select one or more indicators"
+                                ),
+                                multiple = TRUE
+                              ),
+                              
+                              pickerInput(
+                                inputId = "diets_env",
+                                label = "Diets",
+                                selected = c("ani-100","ani-25","ani-50","ani-75","FLX","kcal-100","kcal-25","kcal-50","kcal-75", 
+                                             "PSC","VEG","VGN"),
+                                choices = c("ani-100","ani-25","ani-50","ani-75","FLX","kcal-100","kcal-25","kcal-50","kcal-75", 
+                                            "PSC","VEG","VGN"),
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select one or more diets"
+                                ),
+                                multiple = TRUE
+                              ),
+                              
+                              pickerInput(
+                                inputId = "ncolenv",
+                                label = "Number of columns",
+                                selected = 3,
+                                choices = c(1, 2, 3, 4, 5),
+                                multiple = FALSE
+                              )
+                            ),
+                            
+                            mainPanel(
+                              plotOutput("plot_env", height = "600px")
+                            )
+                          )
+                 )
+               )
+             )
     )
 
+    
+    
+    
+  )
 )
+
+

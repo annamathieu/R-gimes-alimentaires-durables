@@ -103,7 +103,7 @@ server <- function(input, output, session) {
   
   
   
-  # # sélection des columns 
+  # sélection des columns 
   # select_coldatatable <- reactive({
   #   # req(input$columnsdatanutri)
   #   
@@ -112,7 +112,26 @@ server <- function(input, output, session) {
   #   # )
   #   
   # })
+
+  ###############################################################
+  # Onglet ENVIRONMENTAL ASPECTS
+  ###############################################################
   
+  sel_data_env <- reactive({
+    req(input$indicateurs_env, input$paysenv, input$diets_env)
+    
+    env_partition(
+      domains = input$indicateurs_env,
+      country = input$paysenv,
+      regimes = input$diets_env,
+      ncol = input$ncolenv
+    )
+  })
+  
+  output$plot_env <- renderPlot({
+    sel_data_env()
+  })
+
   
   # print data table
   output$datatablenutri <- DT::renderDataTable(
@@ -134,8 +153,28 @@ server <- function(input, output, session) {
   })
   
   
-  
-  
-  
+    ###############################################################
+    # Onglet ENVIRONMENTAL ASPECTS
+    ###############################################################
+    
+    sel_data_env <- reactive({
+      req(input$indicateurs_env, input$paysenv, input$diets_env)
+      
+      env_partition(
+        domains = input$indicateurs_env,
+        country = input$paysenv,
+        regimes = input$diets_env,
+        ncol = input$ncolenv
+      )
+    })
+    
+    output$plot_env <- renderPlot({
+      sel_data_env()
+    })
+    
 }
+    
+  
+  
+
 
