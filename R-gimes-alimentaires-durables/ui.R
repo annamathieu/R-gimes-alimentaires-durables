@@ -139,17 +139,38 @@ fluidPage(
     # onglets 1 et 2 
     ########
     
-    tabPanel(title="Nutritional aspects", 
-             
+    tabPanel(title="Nutritional aspects",
+               
              mainPanel(
-               width= 12, 
-               
-               
+               width = 12,
+             
                tabsetPanel(
                  tabPanel("Data Manipulation",
-                          h3("Contenu de l'onglet 1"),
-                          p("Pas de sidebar ici")
-                 ),
+                          
+                          sidebarLayout(
+                            sidebarPanel(   # side bar dans
+                              width = 2,
+                          h3("Use this tool bar to print nutritional data"),
+
+                          pickerInput(
+                            inputId = "columnsdatanutri",
+                            label = "Columns",
+                            choices = names(nutri_table),
+                            options = pickerOptions(
+                              actionsBox = TRUE,
+                              liveSearch = TRUE,
+                              noneSelectedText = "Select printed columns",
+                              size = 5
+                            ),
+                            multiple = TRUE  # plusieurs colonnes possibles
+                          )),
+                          
+                          mainPanel (
+                            tabPanel("Data Manipulation",DTOutput("datatablenutri"))
+                          
+
+                          ))
+                  ),
                  
                  tabPanel("PCA"),
                  
@@ -157,10 +178,11 @@ fluidPage(
                           sidebarLayout(
                             sidebarPanel(
                               width = 3,
-                              
-                              pickerInput(
+                              h3("Use this tool bar to print graphs showing per country the % of nutrient coverage of different diets scenari"),
+              
+                             pickerInput(
                                 inputId = "paysnutri", 
-                                label = "Pays",
+                                label = "Country",
                                 selected= "FRP",
                                 choices = sort(unique(nutri_new$code_pays)), 
                                 options = pickerOptions(
@@ -175,8 +197,8 @@ fluidPage(
                               pickerInput(
                                 inputId = "nutriments_nutri", 
                                 label = "Nutriment",
-                                selected = names(nutri_new[,5:14]),                                
-                                choices = names(nutri_new[,5:14]), 
+                                selected = names(nutri_new[,4:15]),                                
+                                choices = names(nutri_new[,4:27]), 
                                 options = pickerOptions(
                                   actionsBox = TRUE,
                                   liveSearch = TRUE,
@@ -225,10 +247,9 @@ fluidPage(
                           )
                  )
                )
-               
+    )
              )
              
     )
-  )
-)
 
+)

@@ -103,8 +103,35 @@ server <- function(input, output, session) {
   
   
   
+  # # sélection des columns 
+  # select_coldatatable <- reactive({
+  #   # req(input$columnsdatanutri)
+  #   
+  #   print.nutri ()
+  #     # col = input$columnsdatanutri
+  #   # )
+  #   
+  # })
   
   
+  # print data table
+  output$datatablenutri <- DT::renderDataTable(
+    print.nutri (), 
+    server = T
+    
+  )
+  
+  # output graph nutriments %rec 
+    sel_data_nutri <- reactive({
+    req(input$nutriments_nutri, input$paysnutri, input$diets_nutri)
+    
+    partition.bydiet_f(
+      nutriments = input$nutriments_nutri,
+      country = input$paysnutri,
+      regimes = input$diets_nutri,
+      ncol = input$ncolnutri
+    )
+  })
   
   
   
