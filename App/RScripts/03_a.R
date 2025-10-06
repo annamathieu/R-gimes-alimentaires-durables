@@ -62,7 +62,7 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),           
                                    country = "FRP",                                     # choix du pays 
                                    regimes = levels(nutri_new$diet.scenario),          # choix des diets 
                                    ncol = 3,                                            # nb de colonnes du patchwork (3 par défaut )
-                                   title = "% of nutrient coverage of diets on diets") {
+                                   title = "% of nutrient coverage of diets") {
   ncol <- as.numeric(ncol)
   
   # ordre de la légende et des bars 
