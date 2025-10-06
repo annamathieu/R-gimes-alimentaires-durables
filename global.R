@@ -17,6 +17,8 @@ library(purrr)
 library(FactoMineR)         # analyses factorielles 
 library(factoextra)         # personnalisation de graphiques d'analyse factorielle 
 
+library(DT)                 # Data tables 
+
 world <- ne_countries(scale = "medium", returnclass = "sf")
 world$region_un <- as.factor(world$region_un)
 
