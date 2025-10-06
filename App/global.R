@@ -38,3 +38,6 @@ world$region_un <- as.factor(world$region_un)
 # Charger les fonctions le dossier RScripts
 source("RScripts/carto.R")
 
+
+# fonction pour avoir les graphs nutritionnels 
+source("RScripts/03_a.R")
