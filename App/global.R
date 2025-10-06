@@ -35,6 +35,31 @@ conti<- readRDS(file = "data/conti.rds")
 world <- ne_countries(scale = "medium", returnclass = "sf")
 world$region_un <- as.factor(world$region_un)
 
+
+# couleurs 
+colors.scenario <- c("mistyrose",  # ani-100
+                     "brown4",        # ani 25
+                     "indianred3",    # ani 50
+                     "pink2",          # ani 75
+                     "gray28",     # BMK 
+                     "olivedrab2",  # FLX
+                     "darkorange4", # kcal 100
+                     "orange",      # kcal 25
+                     "darkorange2",  # kcal 50
+                     "darkorange3",  # kcal 75
+                     
+                     "chartreuse3", "forestgreen", "darkgreen") # "PSC"      "VEG"      "VGN" 
+
+
+names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75", 
+                           "BMK", 
+                           "FLX", 
+                           "kcal-100", "kcal-25", 
+                           "kcal-50" , "kcal-75", 
+                           "PSC", "VEG", "VGN") 
+
+
+
 # Charger les fonctions le dossier RScripts
 source("RScripts/carto.R")
 
@@ -43,4 +68,4 @@ source("RScripts/carto.R")
 source("RScripts/03_a.R")
 
 # fct DATA TABLE NUTRI 
-source("RScript/05_a.R")
+source("RScripts/05_a.R")
