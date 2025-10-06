@@ -54,6 +54,7 @@ env_new <- readRDS(file = "data/env_new.rds")
 conti<- readRDS(file = "data/conti.rds")
 
 
+
 # variables globales
 
 world <- ne_countries(scale = "medium", returnclass = "sf")
@@ -61,4 +62,6 @@ world$region_un <- as.factor(world$region_un)
 
 # Charger les fonctions le dossier RScripts
 source("RScripts/carto.R")
+
+
 
