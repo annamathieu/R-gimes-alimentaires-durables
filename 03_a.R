@@ -65,6 +65,10 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),           
                                    title = "Comparaison du % de couverture de chaque nutriment par régime alimentaire") {
   ncol <- as.numeric(ncol)
   
+  # Sécurisation ncol pour éviter l’erreur “argument non numérique…”
+  ncol <- as.integer(ncol)
+  if (is.na(ncol) || ncol < 1) ncol <- 1
+  
   # ordre de la légende et des bars 
   bar_order <- c("BMK", "ani-25", "ani-50", "ani-75", "ani-100", "kcal-25","kcal-50", "kcal-75", "kcal-100", "FLX", "PSC","VEG","VGN")
   legend_order <- c("BMK", "ani-25", "ani-50", "ani-75", "ani-100", "kcal-25","kcal-50", "kcal-75", "kcal-100", "FLX", "PSC","VEG","VGN")
