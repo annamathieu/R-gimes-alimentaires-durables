@@ -85,6 +85,7 @@ conti$nom_continent <- continent_noms[as.character(conti$continent)]
 source("RScripts/carto.R")    # fonction carto
 source("RScripts/03_a.R")     # fonction pour avoir les graphs nutritionnels 
 source("RScripts/05_a.R")     # fct DATA TABLE NUTRI 
+source("RScripts/02_n.R")     # fct DATA TABLE ENV 
 
 
 #####----------------------------------------------------------------------#####
