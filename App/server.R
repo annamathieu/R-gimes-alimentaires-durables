@@ -102,16 +102,25 @@ server <- function(input, output, session) {
   })
   
   
+  ################################ data table nutri ###################################
   
   # sélection des columns 
-  # select_coldatatable <- reactive({
-  #   # req(input$columnsdatanutri)
-  #   
-  #   print.nutri ()
-  #     # col = input$columnsdatanutri
-  #   # )
-  #   
-  # })
+  select_coldatatable <- reactive({
+    req(input$columnsdatanutri)
+    req(length(input$columnsdatanutri) > 0)
+    
+    
+    print.nutri (nutri_new[,input$columnsdatanutri, drop = F]) # on sélectionne les colonnes selectionnées par l'utilisateur
+    # Quand une seule colonne est sélectionné=> drop = F évite d'avoir un résultat sous forme de vecteur 
+    
+  })
+  
+  output$datatablenutri <- DT::renderDataTable({
+    select_coldatatable() 
+    
+  },  server = T)
+  
+
 
   ###############################################################
   # Onglet ENVIRONMENTAL ASPECTS
@@ -133,12 +142,7 @@ server <- function(input, output, session) {
   })
 
   
-  # print data table
-  output$datatablenutri <- DT::renderDataTable(
-    print.nutri (), 
-    server = T
-    
-  )
+
   
   # output graph nutriments %rec 
     sel_data_nutri <- reactive({
