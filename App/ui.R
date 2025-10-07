@@ -292,7 +292,10 @@ fluidPage(
                             ))
                  ),
                  
-                 tabPanel("PCA"),
+                 tabPanel("PCA",
+                          plotOutput("acp_env_plot", height = "700px")
+                 ),
+                 
                  
                  tabPanel("Environmental data Vizualisation",
                           sidebarLayout(
