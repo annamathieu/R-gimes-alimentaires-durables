@@ -1,30 +1,20 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
 
-library(shiny)
-
-# Define server logic required to draw a histogram
-
-
+  ###############################################################
+  ### Onglet CARTE
+  ###############################################################
 server <- function(input, output, session) {
   
   continent_map <- c(
     "Africa"     = "AFR",
     "Americas"   = "AMR",
-    "Asia"       = "SEA",  # ← à adapter selon ce que tu veux (SEA ? WPR ? EMR ?)
+    "Asia"       = "SEA",
     "Europe"     = "EUR",
-    "Oceania"    = "WPR",  # ← à adapter
-    "Antarctica" = NA      # pas dans `conti`, donc on ignore
+    "Oceania"    = "WPR"
   )
   
   
   # Filtrage des données 'conti' selon le continent sélectionné
+  
   filtered_data <- reactive({
     req(input$continent)
     
@@ -35,7 +25,6 @@ server <- function(input, output, session) {
     # Filtrage de conti
     conti[conti$continent %in% continent_codes, ]
   })
-  
   
   # Mise à jour dynamique des pays et régions économiques
   observe({
