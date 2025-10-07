@@ -34,7 +34,8 @@ studiedcountries <- function(conti, country = NULL, reg_eco = NULL, contin= NULL
       weight = 1,                       # Épaisseur
       smoothFactor = 0.2,
       fillOpacity = 0.3,
-      popup       = ~paste0("<b>", name, "</b><br>Niveau économique: ", world_new$r_eco)      # Popup : nom du pays
+      popup       = ~paste0("<b>", name, "</b><br>
+Economic level: ", world_new$r_eco)      # Popup : nom du pays
     ) %>% 
     addLegend("bottomright",
               values = ~r_eco,
