@@ -20,7 +20,7 @@ library(FactoMineR)         # analyses factorielles
 library(factoextra)         # personnalisation graphiques d'analyse factorielle 
 
 library(DT)                 # Data tables 
-
+library(shinythemes)        # thème personnalisé de l'app 
 #####----------------------------------------------------------------------#####
 
 

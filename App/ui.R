@@ -6,10 +6,9 @@ library(shinyWidgets)
 # Define UI for application that draws a histogram
 fluidPage(
   
+  theme = shinytheme("flatly"),
   
-  
-  # COMMENT
-  
+
   
   tags$style(HTML("
       @media (min-width: 768px) {
@@ -24,7 +23,7 @@ fluidPage(
       }
     ")),
   
-  # tags$head(
+  # tags$head(tags$link (rel = "stylesheet", type = "text/css", href = "bootstrap.min.css")),
   #   tags$style(HTML("
   #     html, body, .tab-content, .tab-pane, .mainPanel {
   #       height: 100% !important;
@@ -351,8 +350,9 @@ fluidPage(
                             ),
                             
                             mainPanel(
-                              plotOutput("plot_env", height = "600px")
-                            )
+                              tabPanel("Environmental data Vizualisation", plotOutput("plot_env", height = "600px")), 
+                              width = 9
+                            
                           )
                  )
                )
@@ -365,4 +365,4 @@ fluidPage(
   )
 )
 
-
+)
