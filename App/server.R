@@ -170,6 +170,10 @@ server <- function(input, output, session) {
       env_pca_f(env_new)
     })
     
+    # ---- ENVIRONMENTAL DATA TABLE ----
+    output$datatable_env <- DT::renderDataTable({
+      print.env(env_new)
+    })
     
 }
     

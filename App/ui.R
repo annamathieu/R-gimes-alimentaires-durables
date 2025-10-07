@@ -264,32 +264,13 @@ fluidPage(
                
                tabsetPanel(
                  tabPanel("Data Manipulation",
-                          
-                          sidebarLayout(
-                            sidebarPanel(   # side bar dans
-                              width = 2,
-                              h3("Use this tool bar to print environmental data"),
-                              
-                              # pickerInput(
-                              #   inputId = "columnsdatanutri",
-                              #   label = "Columns",
-                              #   choices = names(nutri_table),
-                              #   options = pickerOptions(
-                              #     actionsBox = TRUE,
-                              #     liveSearch = TRUE,
-                              #     noneSelectedText = "Select printed columns",
-                              #     size = 5
-                              #   ),
-                              #   multiple = TRUE  # plusieurs colonnes possibles
-                              # )
-                              
-                            ),
-                            
-                            mainPanel (
-                              # tabPanel("Data Manipulation",DTOutput("datatablenutri"))
-                              
-                              
-                            ))
+                          fluidRow(
+                            column(
+                              width = 12,
+                              style = "padding-left:40px; padding-right:40px;",
+                              DTOutput("datatable_env", width = "100%")
+                            )
+                          )
                  ),
                  
                  tabPanel("PCA",
