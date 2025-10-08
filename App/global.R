@@ -20,6 +20,7 @@ library(FactoMineR)         # analyses factorielles
 library(factoextra)         # personnalisation graphiques d'analyse factorielle 
 
 library(DT)                 # Data tables 
+library(shinythemes)        # shiny theme
 
 #####----------------------------------------------------------------------#####
 
@@ -87,7 +88,7 @@ source("RScripts/carto.R")    # fonction carto
 source("RScripts/03_a.R")     # fonction pour avoir les graphs nutritionnels 
 source("RScripts/05_a.R")     # fct DATA TABLE NUTRI 
 source("RScripts/02_n.R")     # fct DATA TABLE ENV 
-
+source("RScripts/04_a.R")    #fct pca nutri 
 
 #####----------------------------------------------------------------------#####
 
