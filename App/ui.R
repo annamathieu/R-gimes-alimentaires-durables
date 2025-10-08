@@ -322,7 +322,28 @@ fluidPage(
                  ),
                  
                  tabPanel("PCA",
-                          plotOutput("acp_env_plot", height = "700px")
+                          
+                          # Titre du sous-onglet
+                          titlePanel("Principal Component Analysis of Environmental Indicators"),
+                          
+                          sidebarLayout(
+                            # Barre à gauche
+                            sidebarPanel(
+                              h4("Use this tool to choose a country"),
+                              selectInput(
+                                inputId = "country_env",
+                                label = "Country",
+                                choices = unique(env_new$code_pays),
+                                selected = "FRP"
+                              )
+                            ),
+                            
+                            # Graphique principal
+                            mainPanel(
+                              h3("Relationships and projections of environmental indicators by diet"),
+                              plotOutput("pca_env_plot", height = "600px")
+                            )
+                          )
                  ),
                  
                  
