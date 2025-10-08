@@ -37,50 +37,104 @@ fluidPage(
   ######
   navbarPage(
     title = "Sustainable diet",
-    tabPanel(title = "Main",
-             titlePanel("Bienvenue dans l'application Sustainable Diet"),
-             
-             fluidRow(
-               column(
-                 width = 10,
-                 h3("Présentation de l'application"),
-                 p("Cette application interactive présente les résultats d'une étude sur les régimes alimentaires durables."),
-                 p("Elle se base sur les données de l'étude suivante :"),
-                 tags$blockquote(
-                   em("Springmann et al., Lancet Planetary Health (2018) - The health and nutritional aspects of sustainable diet strategies and their relationship to environmental impacts – a comparative global modelling analysis with country-level detail")
-                 ),
-                 br(),
-                 
-                 h4("Structure de l'application"),
-                 
-                 tags$ul(
-                   tags$li(strong("Général :"), " Scenarios et regroupements régionaux."),
-                   tags$li(strong("Nutrition :"),
-                           tags$ul(
-                             tags$li("Notes sur les sources et unités d'analyse nutritionnelle"),
-                             tags$li("Tableau croisé des résultats nutritionnels"),
-                             tags$li("Données brutes de l'analyse nutritionnelle")
-                           )
-                   ),
-                   tags$li(strong("Santé / Mortalité :"),
-                           tags$ul(
-                             tags$li("Tableau croisé des résultats de mortalité"),
-                             tags$li("Données brutes de l'analyse de mortalité")
-                           )
-                   ),
-                   tags$li(strong("Environnement :"),
-                           tags$ul(
-                             tags$li("Tableau croisé des résultats environnementaux"),
-                             tags$li("Données brutes de l'analyse environnementale")
-                           )
-                   )
-                 ),
-                 br(),
-                 h5("Navigation"),
-                 p("Utilisez les onglets ci-dessus pour explorer les différentes dimensions de l'analyse.")
-               )
-             )
-    ),
+    
+    tabPanel(
+      title = "Introduction",
+      fluidPage(
+        tags$div(
+          style = "max-width: 1500px; margin: auto; font-size: 16px; line-height: 1.6;",
+          
+          # --- Title ---
+          tags$h2("Sustainable Diets: Conciliating nutritional aspects, health concerns, and environmental impacts to go towards tomorrow's diet"),
+          tags$p(
+            "Diet plays a crucial role in both human health and planetary well-being. 
+        In the article, ",
+            tags$em("“Health and nutritional aspects of sustainable diet strategies and their association with environmental impacts: a global modelling analysis with country-level detail”"),
+            " (Springmann et al., 2018, ",
+            tags$em("The Lancet Planetary Health"),
+            "), the authors investigate how changes in diet across more than 150 countries 
+        could lead to better nutrition, lower diet-related mortality, and reduced environmental pressures."
+          ),
+          tags$p(
+            "This Shiny app makes those findings interactive and explorable — allowing users 
+        to visualize, for each country, how adopting alternative diet scenarios could 
+        simultaneously improve health, nutrition, and environmental outcomes."
+          ),
+          tags$br(), 
+          tags$em("Data from:"),
+          tags$blockquote(
+            em("Springmann et al., Lancet Planetary Health (2018) - The health and nutritional aspects of sustainable diet strategies and their relationship to environmental impacts – a comparative global modelling analysis with country-level detail")
+          ),
+          br(),
+          
+          tabsetPanel(
+            tabPanel("Study Objectives", 
+                     tags$p("The study aimed to integrate three domains:"),
+                     tags$ul(
+                       tags$li(tags$b("Nutrition:"), " evaluate dietary adequacy and nutrient intake."),
+                       tags$li(tags$b("Health:"), " estimate mortality changes linked to diet and body weight."),
+                       tags$li(tags$b("Environment:"), " assess resource use and emissions from food production.")
+                     ),
+                     tags$p(
+                       "The analysis compares current national diets with sustainable diet strategies 
+        that could meet global health and environmental targets."
+                     )
+                     ),
+          
+           tabPanel(" Dietary Scenario", 
+                    tags$p("The study modeled three broad strategies for transitioning toward sustainable diets:"),
+                    tags$ol(
+                      tags$li(tags$b("Environmental focus –"), 
+                              " reducing animal-source foods by 25–100% to lower emissions and land use."),
+                      tags$li(tags$b("Food-security focus –"), 
+                              " reducing underweight, overweight, and obesity by 25–100%."),
+                      tags$li(tags$b("Health focus –"), 
+                              " adopting balanced diets (flexitarian, pescatarian, vegetarian, or vegan).")
+                    ),
+                    tags$p(
+                      "All scenarios assume energy-balanced diets, adjusted to local food availability 
+        and consumption patterns."
+                    )),
+           
+           tabPanel("Health Impacts", 
+                    tags$p(
+                      "Health effects were estimated using a comparative risk assessment model 
+        including nine diet- and weight-related risk factors 
+        (e.g., fruit, vegetable, meat, sugar intake, and body weight distribution)."
+                    )), 
+           
+           
+           tabPanel(" Environmental Impact Indicators", 
+                    tags$p("Five environmental dimensions were analyzed:"),
+                    tags$ul(
+                      tags$li("Greenhouse gas emissions (CO₂ eq)"),
+                      tags$li("Cropland use"),
+                      tags$li("Freshwater use"),
+                      tags$li("Nitrogen application"),
+                      tags$li("Phosphorus application")
+                    )
+                    ), 
+           
+           tabPanel("Purpose of This App", 
+                    tags$p("This Shiny application was built to:"),
+                    tags$ul(
+                      tags$li("Display the country-level results from Springmann et al. (2018)."),
+                      tags$li("Let users select a country and explore baseline health, nutrition, and environmental data."),
+                      tags$li("Apply different diet scenarios and visualize projected outcomes."),
+                      tags$li("Compare results across strategies, highlighting synergies and trade-offs."),
+                      tags$li("Facilitate understanding of how dietary transitions can contribute to a healthier population and a more sustainable planet.")
+                      )
+            
+            )
+
+          
+
+
+          )
+        )
+      )
+    )
+    ,
     tabPanel(title="Studied Countries", 
              
              h3("Interactive map of studied countries", 
@@ -156,22 +210,41 @@ fluidPage(
                           
                           sidebarLayout(
                             sidebarPanel(   # side bar dans
-                              width = 2,
-                          h3("Use this tool bar to print nutritional data"),
+                              width = 3,
+                          h3("Use this tool bar to navigate through nutritional data"),
 
-                          pickerInput(
-                            inputId = "columnsdatanutri",
-                            label = "Columns",
-                            choices = names(nutri_new),
-                            selected = names(nutri_new),
-                            options = pickerOptions(
-                              actionsBox = TRUE,
-                              liveSearch = TRUE,
-                              noneSelectedText = "Select printed columns",
-                              size = 5
-                            ),
-                            multiple = TRUE  # plusieurs colonnes possibles
-                          )),
+                          # pickerInput(
+                          #   inputId = "columnsdatanutri",
+                          #   label = "Columns",
+                          #   choices = names(nutri_new),
+                          #   selected = names(nutri_new),
+                          #   options = pickerOptions(
+                          #     actionsBox = TRUE,
+                          #     liveSearch = TRUE,
+                          #     noneSelectedText = "Select printed columns",
+                          #     size = 5
+                          #   ),
+                          #   multiple = TRUE  # plusieurs colonnes possibles
+                          # ),
+                          
+                          tags$br(),
+                          tags$p("How to navigate data:"),
+                          tags$p("Item :"),
+                          tags$ul(
+                            tags$li("abs : value in units"),
+                            tags$li("% rec : nutrient coverage in %, from nutritional recommandation"),
+                            tags$li("pct : % of change from BMK")
+                          ), 
+                          tags$p("Diet Scenario :"),
+                          tags$ul(
+                            tags$li("BMK: current diet"),
+                            tags$li("ani-25 => ani-100 : replacement from 25 to 100 % of animal-source foods with plant-based foods"),
+                            tags$li("kcal-25 => kcal-100: reduced levels of underweight, overweight, and obesity by 25–100%"), 
+                            tags$li("FLX: Flexitarian, PSC: Pescovegetarian, VEG: Vegetarian, VGN: Vegan")
+                            
+                          ), 
+                          
+                          ),
                           
                           mainPanel (
                             tabPanel("Data Manipulation",DTOutput("datatablenutri"))
