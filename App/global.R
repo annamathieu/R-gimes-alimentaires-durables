@@ -89,8 +89,9 @@ source("RScripts/03_a.R")     # fonction pour avoir les graphs nutritionnels
 source("RScripts/05_a.R")     # fct DATA TABLE NUTRI 
 source("RScripts/02_n.R")     # fct DATA TABLE ENV 
 source("RScripts/04_a.R")    #fct pca nutri 
-source("RScripts/03_n.R")     # fct PCA ENV 
-
+source("RScripts/03_n.R")     # fct PCA ENV
+source("RScripts/04_n.R")     # fct PCA ENV
+ 
 
 #####----------------------------------------------------------------------#####
 
