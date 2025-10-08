@@ -15,7 +15,7 @@ pca.nutri <- function (nutri_new, country = "FRP") {
   # pca_data_nutri <- pca_data_nutri[,-26]
   
   # PCA
-  pca_res_nutri <- PCA(X = (nutri_new %>% filter(item == "abs", code_pays=="FRP") %>% select(-code_pays,-item,-grp_diet)), 
+  pca_res_nutri <- PCA(X = (nutri_new %>% filter(item == "abs", code_pays==country) %>% select(-code_pays,-item,-grp_diet)), 
                        quali.sup = c(1), graph = F)
   
   # graph of individuals PCA 
@@ -36,8 +36,9 @@ pca.nutri <- function (nutri_new, country = "FRP") {
     labs(title = "Graph of individuals", 
          col = "Diet") +
     
-    theme(title = element_text(size = 18), 
-          legend.title = element_text(size=12))
+    theme(title = element_text(size = 20), 
+          legend.title = element_text(size=14), 
+          legend.text = element_text(size=13))
   
   
   # Crée un vecteur de couleurs : vert pour "fiber", rouge pour les autres
@@ -57,10 +58,7 @@ pca.nutri <- function (nutri_new, country = "FRP") {
   
   graph.v <- graph.v + 
     labs(title = "Graph of variables") +
-    
-    theme(title = element_text(size = 18), 
-          legend.title = element_text(size=12), 
-          legend.text = element_text(size=12))
+    theme(title = element_text(size = 20))
   
   return(list(graph.ind, graph.v))
   
