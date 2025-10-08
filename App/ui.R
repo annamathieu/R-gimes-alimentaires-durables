@@ -325,11 +325,18 @@ fluidPage(
                  
                  tabPanel("PCA",
                           
-                          # Titre du sous-onglet
-                          titlePanel("Principal Component Analysis of Environmental Indicators"),
+                          # ---- Titre stylé et centré ----
+                          tags$div(
+                            "Principal Component Analysis of Environmental Indicators",
+                            style = "text-align: center; 
+             font-weight: bold; 
+             font-size: 20px; 
+             color: black; 
+             margin-bottom: 25px;"
+                          ),
                           
                           sidebarLayout(
-                            # Barre à gauche
+                            # ---- Barre latérale ----
                             sidebarPanel(
                               h4("Use this tool to choose a country"),
                               selectInput(
@@ -340,9 +347,8 @@ fluidPage(
                               )
                             ),
                             
-                            # Graphique principal
+                            # ---- Graphique principal ----
                             mainPanel(
-                              h3("Relationships and projections of environmental indicators by diet"),
                               plotOutput("pca_env_plot", height = "600px")
                             )
                           )
