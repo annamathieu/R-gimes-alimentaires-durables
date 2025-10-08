@@ -31,8 +31,4 @@ mfa_simple <- function(country = "FRP") {
                  type = c("n", "s", "s", "s"),
                  name.group = c("diet", "nutritional", "environmental", "health"),
                  num.group.sup = 1)
-  
-
 }
-
-mfa_simple()

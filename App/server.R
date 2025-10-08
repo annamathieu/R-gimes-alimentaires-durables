@@ -204,7 +204,6 @@ server <- function(input, output, session) {
     ###############################################################
 
     
-    # server
     sel_mfa <- reactive({
       req(input$country_mfa)
       mfa_simple(country = input$country_mfa)
@@ -213,7 +212,6 @@ server <- function(input, output, session) {
     output$mfa_plot <- renderPlot({
       sel_mfa()
     })
-    
     
     
     
