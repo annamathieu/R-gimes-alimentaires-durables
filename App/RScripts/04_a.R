@@ -31,14 +31,16 @@ pca.nutri <- function (nutri_new, country = "FRP") {
                   y = (pca_res_nutri$ind$coord[,2])+0.3), label = c("BMK","FLX","PSC","VEG",'VGN',"ani-25","ani-50","ani-75","ani-100","kcal-25","kcal-50","kcal-75","kcal-100"), 
               col = c("gray28","olivedrab2","chartreuse3", "forestgreen", "darkgreen", 
                       "brown4", "indianred3", "pink3", "pink1",
-                      "orange", "darkorange2","darkorange3","darkorange4") ) +
+                      "orange", "darkorange2","darkorange3","darkorange4"), 
+              size = 5) +
     
     labs(title = "Graph of individuals", 
          col = "Diet") +
     
     theme(title = element_text(size = 20), 
           legend.title = element_text(size=14), 
-          legend.text = element_text(size=13))
+          legend.text = element_text(size=13), 
+          text = element_text(size = 13))
   
   
   # Crée un vecteur de couleurs : vert pour "fiber", rouge pour les autres
@@ -54,15 +56,17 @@ pca.nutri <- function (nutri_new, country = "FRP") {
                       select = c("calories","protein","carbohydrates","fat", "vitaminC","vitaminA" ,"calcium","iron","zinc"  ,       
                                  "fiber","vitaminB12"), 
                       col.var = cols, 
-                      graph.type = "ggplot") 
+                      graph.type = "ggplot", 
+                      ggoptions = (list(size = 5) ))
   
   graph.v <- graph.v + 
     labs(title = "Graph of variables") +
-    theme(title = element_text(size = 20))
+    theme(title = element_text(size = 20), 
+          text = element_text(size = 12))
   
   return(list(graph.ind, graph.v))
   
 }
 
 
-# pca.nutri(nutri_new)
+pca.nutri(nutri_new)
