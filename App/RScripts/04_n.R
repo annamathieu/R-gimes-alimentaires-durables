@@ -19,8 +19,8 @@ print.env <- function(data = env_new) {
     rownames = FALSE,
     filter = "top",          # ajout d’un filtre interactif en haut des colonnes
     caption = htmltools::tags$caption(
-      style = 'caption-side: top; text-align: center; font-weight: bold; font-size: 18px;',
-      "Environmental dataset (env_new)"
+      style = 'caption-side: top; text-align: center; font-weight: bold; font-size: 18px; color: black;',
+      "Environmental dataset"
     )
   )
 }
