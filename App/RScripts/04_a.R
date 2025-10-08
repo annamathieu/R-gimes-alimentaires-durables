@@ -59,7 +59,8 @@ pca.nutri <- function (nutri_new, country = "FRP") {
     labs(title = "Graph of variables") +
     
     theme(title = element_text(size = 18), 
-          legend.title = element_text(size=12))
+          legend.title = element_text(size=12), 
+          legend.text = element_text(size=12))
   
   return(list(graph.ind, graph.v))
   
