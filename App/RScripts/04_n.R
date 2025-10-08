@@ -5,8 +5,6 @@
 print.env <- function(data = env_new) {
   library(DT)
   
-  , 
-  
   datatable(
     data,
     options = list(
