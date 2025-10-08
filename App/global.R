@@ -67,7 +67,8 @@ continent_noms <- c(
   "AMR" = "Americas",
   "EMR" = "Eastern Mediterranean",
   "EUR" = "Europe",
-  "SEA" = "South-East Asia",
+  "SEA" = "Asia",
+  "SEAR" = "Asia",
   "WPR" = "Western Pacific"
 )
 
