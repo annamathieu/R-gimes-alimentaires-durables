@@ -451,25 +451,32 @@ fluidPage(
   ###############################################################
   
   tabPanel("Global Analysis",
-           tags$div(
-             "Multiple Factor Analysis (MFA) on All Domains: Nutritional, Environmental, and Health",
-             style = "text-align: center; font-weight: bold; font-size: 20px; color: black; margin-bottom: 25px;"
-           ),
+           
+           # Titre centré
+           titlePanel("Multiple Factor Analysis (MFA) on All Domains: Nutritional, Environmental, and Health"),
+           
            sidebarLayout(
              sidebarPanel(
-               width = 2,
                h4("Use this tool to choose a country"),
-               pickerInput(
+               selectInput(
                  inputId = "country_mfa",
                  label = "Country",
-                 choices = sort(unique(nutri_new$code_pays)),
-                 selected = "FRP",
-                 options = pickerOptions(actionsBox = TRUE, liveSearch = TRUE)
+                 choices = unique(env_new$code_pays),
+                 selected = "FRP"
                )
              ),
-             mainPanel(width = 10, plotOutput("mfa_plot", height = "700px"))
+             
+             mainPanel(
+               tabsetPanel(
+                 tabPanel("Individuals", plotOutput("plot_ind")),
+                 tabPanel("Groups", plotOutput("plot_groups")),
+                 tabPanel("Correlation Circle", plotOutput("plot_corr")),
+                 tabPanel("Partial Individuals", plotOutput("plot_partial"))
+               )
+             )
            )
   )
+  
   
   
   

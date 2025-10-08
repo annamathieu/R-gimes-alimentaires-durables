@@ -184,15 +184,15 @@ server <- function(input, output, session) {
       sel_data_env()
     })
     
-    # ---- PCA ENVIRONMENTAL ----
+    # PCA ENVIRONMENTAL
     output$pca_env_plot <- renderPlot({
       env_pca_f(data = env_new, country = input$country_env)
     })
     
     
     
-    # ---- ENVIRONMENTAL DATA TABLE ----
-    # ---- DataTable ENV avec sélection de colonnes ----
+    # ENVIRONMENTAL DATA TABLE
+    
     output$datatable_env <- DT::renderDataTable({
       req(input$columns_env)
       print.env(env_new[, input$columns_env, drop = FALSE])
@@ -202,15 +202,67 @@ server <- function(input, output, session) {
     ###############################################################
     # GLOBAL ANALYSIS - MFA
     ###############################################################
-
     
-    sel_mfa <- reactive({
+    #Calcul de la MFA une seule fois
+    res_mfa <- reactive({
       req(input$country_mfa)
-      mfa_simple(country = input$country_mfa)
+      
+      data.mfa <- cbind(
+        nutri_new %>%
+          filter(item == "abs", code_pays == input$country_mfa, diet.scenario != "BMK") %>%
+          select(-item, -code_pays, -grp_diet),
+        env_new %>%
+          filter(item == "abs", code_pays == input$country_mfa, socio.econ.scenario == "SSP2", diet.scenario != "BMK") %>%
+          select(-item, -code_pays, -socio.econ.scenario, -grp_diet, -diet.scenario),
+        sante_new %>%
+          filter(parameter == "deaths_avd", disease == "all-c", code_pays == input$country_mfa) %>%
+          select(-grp_diet, -diet.scenario, -disease, -parameter, -code_pays, -`all-rf`)
+      )
+      
+      # Vérification
+      if (nrow(data.mfa) == 0) return(NULL)
+      
+      MFA(data.mfa,
+          group = c(1, 24, 5, 9),
+          type = c("n", "s", "s", "s"),
+          name.group = c("diet", "nutritional", "environmental", "health"),
+          num.group.sup = 1)
     })
     
-    output$mfa_plot <- renderPlot({
-      sel_mfa()
+    # Graphique 1 : Individuals
+    output$plot_ind <- renderPlot({
+      req(res_mfa())
+      fviz_mfa_ind(res_mfa(), repel = TRUE) +
+        labs(title = paste("Individuals factor map -", input$country_mfa)) +
+        theme_minimal(base_size = 13) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+    })
+    
+    # Graphique 2 : Groups representation
+    output$plot_groups <- renderPlot({
+      req(res_mfa())
+      fviz_mfa_var(res_mfa(), "group") +
+        labs(title = "Groups representation") +
+        theme_minimal(base_size = 13) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+    })
+    
+    # Graphique 3 : Correlation circle
+    output$plot_corr <- renderPlot({
+      req(res_mfa())
+      fviz_mfa_var(res_mfa(), "quanti.var", repel = TRUE) +
+        labs(title = "Correlation circle (quantitative variables)") +
+        theme_minimal(base_size = 13) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5))
+    })
+    
+    # Graphique 4 : Individuals with partial groups
+    output$plot_partial <- renderPlot({
+      req(res_mfa())
+      fviz_mfa_ind(res_mfa(), partial = "all", repel = TRUE) +
+        labs(title = "Individuals with partial groups") +
+        theme_minimal(base_size = 13) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5))
     })
     
     
