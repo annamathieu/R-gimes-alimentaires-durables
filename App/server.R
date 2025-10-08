@@ -167,8 +167,9 @@ server <- function(input, output, session) {
     
     # ---- PCA ENVIRONMENTAL ----
     output$acp_env_plot <- renderPlot({
-      env_pca_f(env_new)
+      env_pca_f(env_new, country = "FRP")
     })
+    
     
     # ---- ENVIRONMENTAL DATA TABLE ----
     output$datatable_env <- DT::renderDataTable({

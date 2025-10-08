@@ -1,12 +1,13 @@
 ##############################################################################
-# PCA ENVIRONMENTAL FUNCTION 
+# PCA ENVIRONMENTAL FUNCTION - FRANCE ONLY (FRP)
 ##############################################################################
 
-env_pca_f <- function(data = env_new, color_by = "diet.scenario") {
+env_pca_f <- function(data = env_new, country = "FRP", color_by = "diet.scenario") {
   library(FactoMineR)
   library(factoextra)
   library(ggplot2)
   library(patchwork)
+  library(dplyr)
   
   # ---- Custom colors ----
   colors.scenario <- c(
@@ -24,9 +25,16 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario") {
   # ---- Select numeric indicators ----
   vars <- c("GHGe", "land", "water", "nitr", "phos")
   
-  # On garde seulement les lignes sans NA sur ces variables et diet.scenario
-  data <- data[, c(color_by, vars)]
-  data <- na.omit(data)
+  # ---- Filter for France (FRP) ----
+  data <- data %>% 
+    filter(code_pays == country) %>% 
+    select(all_of(c(color_by, vars))) %>% 
+    na.omit()
+  
+  # ---- Check data ----
+  if (nrow(data) == 0) {
+    stop("No data available for the selected country (FRP).")
+  }
   
   # ---- Run PCA ----
   acp <- PCA(data[, vars], scale.unit = TRUE, graph = FALSE)
@@ -36,7 +44,7 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario") {
                      col.var = "contrib",
                      gradient.cols = c("skyblue", "orange", "red"),
                      repel = TRUE) +
-    labs(title = "Relationships between environmental indicators") +
+    labs(title = "Relationships between environmental indicators (France)") +
     theme_minimal(base_size = 13) +
     theme(
       plot.title = element_text(face = "bold", hjust = 0.5),
@@ -44,7 +52,7 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario") {
       panel.grid.major = element_line(color = "grey90")
     )
   
-  # ---- GRAPH 2: Individuals ----
+  # ---- GRAPH 2: Individuals (diet scenarios) ----
   data[[color_by]] <- factor(data[[color_by]], levels = bar_order)
   
   g2 <- fviz_pca_ind(acp,
@@ -55,7 +63,7 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario") {
                      addEllipses = FALSE,
                      legend.title = "Diet scenario") +
     scale_color_manual(values = colors.scenario, breaks = bar_order) +
-    labs(title = "Diets position in the environmental PCA space") +
+    labs(title = "Diet scenarios projection (France)") +
     theme_minimal(base_size = 13) +
     theme(
       plot.title = element_text(face = "bold", hjust = 0.5),
