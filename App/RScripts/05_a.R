@@ -29,7 +29,39 @@ print.nutri <- function(data) {
       lengthMenu = c(5,10,15,20), # choix du nombre d'observations affichées 
       ordering = TRUE, # permet à l'utilisateur de trier les obs par les c
       # searching = TRUE , # autorise filtering
-      autoWidth = TRUE)
+      autoWidth = TRUE, 
+    columnDefs = list(
+      list(
+        targets = which(names(data) == "item") - 1,  # colonne "Sexe"
+        render = JS(
+          "function(data, type, row, meta) {
+             if (data === 'abs') return 'Value';
+             if (data === '%rec') return '% recommandation';
+             if (data === 'pct') return '% variation with BMK';
+             return data;
+           }"
+        )
+      )
+      # , 
+      
+      # list(
+      #   targets = which(names(data) == "diet.scenario") - 1,  # colonne "Sexe"
+      #   render = JS(
+      #     "function(data, type, row, meta) {
+      #        if (data === 'BMK') return 'Value';
+      #        if (data === '%rec') return '% recommandation';
+      #        if (data === 'pct') return '% variation with BMK';
+      #        return data;
+      #      }"
+      #   )
+      # ), 
+      
+      
+      
+    ))
+    
+    
+    
   )
   
   return (tab)
@@ -40,7 +72,7 @@ print.nutri <- function(data) {
 
 # Tests
 
-# print.nutri()
+# print.nutri(nutri_new)
 # 
 # names(nutri_new)
 

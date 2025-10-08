@@ -100,7 +100,7 @@ partition.bydiet_f <- function(nutriments = names(nutri_new[, 5:28]),           
                 vjust = 1) +
       theme(text = element_text(size = 12),
             axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
-            title = element_text(size = 5, face = "plain", colour = "forestgreen"), 
+            title = element_text(size = 5, face = "bold", colour = "black"), 
             axis.title.y = element_text(size = 13, face = "bold"),
             legend.position = "none") +
       scale_y_continuous(limits = c(ifelse(y_min<0,y_min,0), ifelse(y_max>100,y_max,100))) +
