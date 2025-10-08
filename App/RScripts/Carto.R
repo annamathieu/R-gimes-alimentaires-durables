@@ -39,7 +39,7 @@ Economic level: ", world_new$r_eco)      # Popup : nom du pays
     ) %>% 
     addLegend("bottomright",
               values = ~r_eco,
-              title = "Région économique",
+              title = "Economical levels",
               colors   = pal(c("HIC","LIC","LMC", "UMC"))[c(1,4,3,2)],  # ordre des facteurs couleur palette
               labels   = c("HIC: High-income countries ",
                            "UMC: Upper middle-income countries",
