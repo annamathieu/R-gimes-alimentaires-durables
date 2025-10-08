@@ -1,5 +1,5 @@
 ##############################################################################
-# PCA ENVIRONMENTAL FUNCTION - FRANCE ONLY (FRP)
+# PCA ENVIRONMENTAL FUNCTION 
 ##############################################################################
 
 env_pca_f <- function(data = env_new, country = "FRP", color_by = "diet.scenario") {
@@ -9,7 +9,7 @@ env_pca_f <- function(data = env_new, country = "FRP", color_by = "diet.scenario
   library(patchwork)
   library(dplyr)
   
-  # ---- Custom colors ----
+  # Custom colors
   colors.scenario <- c(
     "BMK" = "grey70",
     "ani-25" = "#ffb3b3", "ani-50" = "#ff6666", "ani-75" = "#ff1a1a", "ani-100" = "#b30000",
@@ -17,29 +17,29 @@ env_pca_f <- function(data = env_new, country = "FRP", color_by = "diet.scenario
     "FLX" = "#6ebf8b", "PSC" = "#32a852", "VEG" = "#26734d", "VGN" = "#145a32"
   )
   
-  # ---- Order of legend ----
+  # Order of legend 
   bar_order <- c("BMK", "ani-25", "ani-50", "ani-75", "ani-100",
                  "kcal-25","kcal-50", "kcal-75", "kcal-100",
                  "FLX", "PSC","VEG","VGN")
   
-  # ---- Select numeric indicators ----
+  # Select numeric indicators 
   vars <- c("GHGe", "land", "water", "nitr", "phos")
   
-  # ---- Filter for France (FRP) ----
+  # Filter for France (FRP) 
   data <- data %>% 
     filter(code_pays == country) %>% 
     select(all_of(c(color_by, vars))) %>% 
     na.omit()
   
-  # ---- Check data ----
+  # Check data
   if (nrow(data) == 0) {
     stop("No data available for the selected country (FRP).")
   }
   
-  # ---- Run PCA ----
+  # PCA
   acp <- PCA(data[, vars], scale.unit = TRUE, graph = FALSE)
   
-  # ---- GRAPH 1: Variables ----
+  # GRAPH 1: Variables
   g1 <- fviz_pca_var(acp,
                      col.var = "contrib",
                      gradient.cols = c("skyblue", "orange", "red"),
@@ -52,7 +52,7 @@ env_pca_f <- function(data = env_new, country = "FRP", color_by = "diet.scenario
       panel.grid.major = element_line(color = "grey90")
     )
   
-  # ---- GRAPH 2: Individuals (diet scenarios) ----
+  # GRAPH 2: Individuals (diet scenarios)
   data[[color_by]] <- factor(data[[color_by]], levels = bar_order)
   
   g2 <- fviz_pca_ind(acp,
