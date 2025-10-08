@@ -445,7 +445,34 @@ fluidPage(
     
     
     
+  ),
+  ###############################################################
+  # Onglet GLOBAL ANALYSIS
+  ###############################################################
+  
+  tabPanel("Global Analysis",
+           tags$div(
+             "Multiple Factor Analysis (MFA) on All Domains: Nutritional, Environmental, and Health",
+             style = "text-align: center; font-weight: bold; font-size: 20px; color: black; margin-bottom: 25px;"
+           ),
+           sidebarLayout(
+             sidebarPanel(
+               width = 2,
+               h4("Use this tool to choose a country"),
+               pickerInput(
+                 inputId = "country_mfa",
+                 label = "Country",
+                 choices = sort(unique(nutri_new$code_pays)),
+                 selected = "FRP",
+                 options = pickerOptions(actionsBox = TRUE, liveSearch = TRUE)
+               )
+             ),
+             mainPanel(width = 10, plotOutput("mfa_plot", height = "700px"))
+           )
   )
+  
+  
+  
 )
 
 )

@@ -199,6 +199,23 @@ server <- function(input, output, session) {
     }, server = TRUE)
     
     
+    ###############################################################
+    # GLOBAL ANALYSIS - MFA
+    ###############################################################
+
+    
+    # server
+    sel_mfa <- reactive({
+      req(input$country_mfa)
+      mfa_simple(country = input$country_mfa)
+    })
+    
+    output$mfa_plot <- renderPlot({
+      sel_mfa()
+    })
+    
+    
+    
     
 }
     

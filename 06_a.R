@@ -13,3 +13,5 @@ data.mfa <- cbind(
 # performing MFA
 res.mfa.ns <- MFA(data.mfa, group =c(1,24,5,9), type =c("n","s","s","s"), name.group = c("diet", "nutritional", "environmental", "health"), num.group.sup = 1 )
 
+
+
