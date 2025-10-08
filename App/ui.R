@@ -6,10 +6,9 @@ library(shinyWidgets)
 # Define UI for application that draws a histogram
 fluidPage(
   
+  theme = shinytheme("flatly"),
   
-  
-  # COMMENT
-  
+
   
   tags$style(HTML("
       @media (min-width: 768px) {
@@ -24,7 +23,7 @@ fluidPage(
       }
     ")),
   
-  # tags$head(
+  # tags$head(tags$link (rel = "stylesheet", type = "text/css", href = "bootstrap.min.css")),
   #   tags$style(HTML("
   #     html, body, .tab-content, .tab-pane, .mainPanel {
   #       height: 100% !important;
@@ -265,35 +264,19 @@ fluidPage(
                
                tabsetPanel(
                  tabPanel("Data Manipulation",
-                          
-                          sidebarLayout(
-                            sidebarPanel(   # side bar dans
-                              width = 2,
-                              h3("Use this tool bar to print environmental data"),
-                              
-                              # pickerInput(
-                              #   inputId = "columnsdatanutri",
-                              #   label = "Columns",
-                              #   choices = names(nutri_table),
-                              #   options = pickerOptions(
-                              #     actionsBox = TRUE,
-                              #     liveSearch = TRUE,
-                              #     noneSelectedText = "Select printed columns",
-                              #     size = 5
-                              #   ),
-                              #   multiple = TRUE  # plusieurs colonnes possibles
-                              # )
-                              
-                            ),
-                            
-                            mainPanel (
-                              # tabPanel("Data Manipulation",DTOutput("datatablenutri"))
-                              
-                              
-                            ))
+                          fluidRow(
+                            column(
+                              width = 12,
+                              style = "padding-left:40px; padding-right:40px;",
+                              DTOutput("datatable_env", width = "100%")
+                            )
+                          )
                  ),
                  
-                 tabPanel("PCA"),
+                 tabPanel("PCA",
+                          plotOutput("acp_env_plot", height = "700px")
+                 ),
+                 
                  
                  tabPanel("Environmental data Vizualisation",
                           sidebarLayout(
@@ -351,8 +334,9 @@ fluidPage(
                             ),
                             
                             mainPanel(
-                              plotOutput("plot_env", height = "600px")
-                            )
+                              tabPanel("Environmental data Vizualisation", plotOutput("plot_env", height = "600px")), 
+                              width = 9
+                            
                           )
                  )
                )
@@ -365,4 +349,4 @@ fluidPage(
   )
 )
 
-
+)
