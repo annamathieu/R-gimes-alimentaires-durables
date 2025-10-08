@@ -37,7 +37,7 @@ fluidPage(
   ######
   navbarPage(
     title = "Sustainable diet",
-    tabPanel(title = "Accueil",
+    tabPanel(title = "Main",
              titlePanel("Bienvenue dans l'application Sustainable Diet"),
              
              fluidRow(
