@@ -82,6 +82,10 @@ fluidPage(
              )
     ),
     tabPanel(title="Studied Countries", 
+             
+             h3("Interactive map of studied countries", 
+                style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+             
              # Sidebar with a slider input for number of bins
              sidebarLayout(
                sidebarPanel(
@@ -131,12 +135,10 @@ fluidPage(
                # Show a plot
                mainPanel(
                  tabsetPanel(
-                   tabPanel("Carte", leafletOutput("map", height = "500px")),
-                   tabPanel("Other", tableOutput("table")),
-                   tabPanel("Table", tableOutput("table"))
+                   tabPanel("Studied Countries", leafletOutput("map", height = "500px"))
+
                  )
-               ))
-    ),
+               ))),
     
     # onglets 1 et 2 
     ########
@@ -223,7 +225,7 @@ fluidPage(
                  
                  tabPanel("Nutritional qualities of diets",
                           
-                          h3("Visualise differences in nutritional qualities of diets in chosen country", 
+                          h3("Visualize differences in nutritional qualities of diets in chosen country", 
                              style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
                           
                           sidebarLayout(
