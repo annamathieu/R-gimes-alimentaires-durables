@@ -5,6 +5,9 @@
 print.env <- function(data = env_new) {
   library(DT)
   
+  num_cols <- sapply(data, is.numeric)
+  data[, num_cols] <- round(data[, num_cols], 0)
+  
   datatable(
     data,
     options = list(
