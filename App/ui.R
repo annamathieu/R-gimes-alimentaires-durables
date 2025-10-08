@@ -151,7 +151,7 @@ fluidPage(
                tabsetPanel(
                  tabPanel("Data Manipulation",
                           
-                          h3("Explore nutritional data", 
+                          h3("Explore nutritional dataset", 
                              style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
                           
                           sidebarLayout(
@@ -314,11 +314,33 @@ fluidPage(
                
                tabsetPanel(
                  tabPanel("Data Manipulation",
-                          fluidRow(
-                            column(
-                              width = 12,
-                              style = "padding-left:40px; padding-right:40px;",
-                              DTOutput("datatable_env", width = "100%")
+                          
+                          h3("Explore environmental dataset", 
+                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                          
+                          sidebarLayout(
+                            sidebarPanel(
+                              width = 2,
+                              h3("Use this tool bar to print environmental data"),
+                              h4("Columns"),
+                              pickerInput(
+                                inputId = "columns_env",
+                                label = NULL,
+                                choices = names(env_new),
+                                selected = names(env_new),
+                                options = pickerOptions(
+                                  actionsBox = TRUE,
+                                  liveSearch = TRUE,
+                                  noneSelectedText = "Select printed columns",
+                                  size = 5
+                                ),
+                                multiple = TRUE
+                              )
+                            ),
+                            
+                            mainPanel(
+                              tabPanel("Data Manipulation", DTOutput("datatable_env")),
+                              width = 10
                             )
                           )
                  ),

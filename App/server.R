@@ -192,9 +192,13 @@ server <- function(input, output, session) {
     
     
     # ---- ENVIRONMENTAL DATA TABLE ----
+    # ---- DataTable ENV avec sélection de colonnes ----
     output$datatable_env <- DT::renderDataTable({
-      print.env(env_new)
-    })
+      req(input$columns_env)
+      print.env(env_new[, input$columns_env, drop = FALSE])
+    }, server = TRUE)
+    
+    
     
 }
     

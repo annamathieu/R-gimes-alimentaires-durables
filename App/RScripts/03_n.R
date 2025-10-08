@@ -49,7 +49,7 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario", country = "FRP
                      col.var = "contrib",
                      gradient.cols = c("skyblue", "orange", "red"),
                      repel = TRUE) +
-    labs(title = "Relationships between environmental indicators (France)",
+    labs(title = "Relationships between environmental indicators",
          x = paste0("Dim 1 (", dim1_var, "%)"),
          y = paste0("Dim 2 (", dim2_var, "%)")) +
     theme_minimal(base_size = 13) +
@@ -66,7 +66,7 @@ env_pca_f <- function(data = env_new, color_by = "diet.scenario", country = "FRP
     geom_text(aes(label = diet.scenario), vjust = -0.8, size = 3.5) +
     scale_color_manual(values = colors.scenario, breaks = bar_order) +
     labs(
-      title = "Diet scenarios projection (France)",
+      title = "Diet scenarios projection",
       color = "Diet scenario",
       x = paste0("Dim 1 (", dim1_var, "%)"),
       y = paste0("Dim 2 (", dim2_var, "%)")
