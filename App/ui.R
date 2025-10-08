@@ -149,6 +149,9 @@ fluidPage(
                tabsetPanel(
                  tabPanel("Data Manipulation",
                           
+                          h3("Explore nutritional data", 
+                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                          
                           sidebarLayout(
                             sidebarPanel(   # side bar dans
                               width = 2,
@@ -175,9 +178,54 @@ fluidPage(
                           ))
                   ),
                  
-                 tabPanel("PCA"),
+                   tabPanel("PCA", 
+                            
+                            
+                            h3("Principal Composant Analysis of nutrients values in choosen country", 
+                               style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                            
+                            sidebarLayout(
+                              sidebarPanel(   # side bar dans
+                                width = 2,
+                                h3("Use this tool choose a country"),
+                                
+                                pickerInput(
+                                  inputId = "country_pca_nutri",
+                                  label = "Country",
+                                  choices = sort(unique(nutri_new$code_pays)),
+                                  selected = "FRP",
+                                  options = pickerOptions(
+                                    actionsBox = TRUE,
+                                    liveSearch = TRUE,
+                                    noneSelectedText = "Select a country",
+                                    size = 5
+                                  ),
+                                  multiple = FALSE  # plusieurs colonnes possibles
+                                )),
+                              
+                              mainPanel (
+                                tabPanel("PCA", 
+                                         fluidRow(
+                                           column(
+                                             width = 6,
+                                             plotOutput("plot1", height = "600px", width = "100%")
+                                           ),
+                                           column(
+                                             width = 6,
+                                             plotOutput("plot2", height = "600px", width = "100%")
+                                           )
+                                         )), 
+                                width = 9,
+                                
+                                
+                              )
+                   )),
                  
                  tabPanel("Nutritional qualities of diets",
+                          
+                          h3("Visualise differences in nutritional qualities of diets in chosen country", 
+                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                          
                           sidebarLayout(
                             sidebarPanel(
                               width = 3,

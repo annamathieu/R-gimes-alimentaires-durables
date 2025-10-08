@@ -109,7 +109,26 @@ server <- function(input, output, session) {
     
   },  server = T)
   
+  
+  
+  ###############################################################
+  # PCA nutri 
+  ###############################################################
+  sel_country_n <- reactive ({
+    req(input$country_pca_nutri)
+    
+    pca.nutri(nutri_new, 
+              country=input$country_pca_nutri)
+  })
 
+  output$plot1 <- renderPlot({
+    sel_country_n()[[1]] 
+  })
+  
+  output$plot2 <- renderPlot({
+    sel_country_n()[[2]] 
+  })
+  
 
   ###############################################################
   # Onglet ENVIRONMENTAL ASPECTS
