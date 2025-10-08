@@ -20,7 +20,8 @@ library(FactoMineR)         # analyses factorielles
 library(factoextra)         # personnalisation graphiques d'analyse factorielle 
 
 library(DT)                 # Data tables 
-library(shinythemes)        # thème personnalisé de l'app 
+library(shinythemes)        # shiny theme
+
 #####----------------------------------------------------------------------#####
 
 
@@ -67,7 +68,8 @@ continent_noms <- c(
   "AMR" = "Americas",
   "EMR" = "Eastern Mediterranean",
   "EUR" = "Europe",
-  "SEA" = "South-East Asia",
+  "SEA" = "Asia",
+  "SEAR" = "Asia",
   "WPR" = "Western Pacific"
 )
 
@@ -85,10 +87,8 @@ conti$nom_continent <- continent_noms[as.character(conti$continent)]
 source("RScripts/carto.R")    # fonction carto
 source("RScripts/03_a.R")     # fonction pour avoir les graphs nutritionnels 
 source("RScripts/05_a.R")     # fct DATA TABLE NUTRI 
-source("RScripts/02_n.R")     # fct GRAPHE ENV 
-source("RScripts/03_n.R")     # fct PCA ENV 
-source("RScripts/04_n.R")     # fct DATA ENV 
-
+source("RScripts/02_n.R")     # fct DATA TABLE ENV 
+source("RScripts/04_a.R")    #fct pca nutri 
 
 #####----------------------------------------------------------------------#####
 

@@ -7,7 +7,7 @@ server <- function(input, output, session) {
   continent_map <- c(
     "Africa"     = "AFR",
     "Americas"   = "AMR",
-    "Asia"       = "SEA",
+    "Asia"       = c("SEA", "SEAR"),
     "Europe"     = "EUR",
     "Oceania"    = "WPR"
   )
