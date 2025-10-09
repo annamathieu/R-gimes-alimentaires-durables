@@ -633,7 +633,7 @@ fluidPage(
                               inputId = "selected_countries", 
                               label = "Country",
                               selected = "FRP",
-                              choices = sort(unique(sante$pays)),
+                              choices = sort(unique(sante_new$pays)),
                               multiple = TRUE,
                               options = pickerOptions(
                                 actionsBox = TRUE,
@@ -645,7 +645,7 @@ fluidPage(
                             pickerInput(
                               inputId = "selected_risk_factors",
                               label = "Risk Factors",
-                              choices = c("all-rf", names(sante)[6:14]), # Remplace par les vrais noms des facteurs
+                              choices = c("all-rf", names(sante_new)[6:14]), # Remplace par les vrais noms des facteurs
                               selected = c("all-rf"),
                               multiple = TRUE,
                               options = pickerOptions(
@@ -675,7 +675,7 @@ fluidPage(
                             pickerInput(
                               inputId = "selected_disease",
                               label = "Disease",
-                              choices = sort(unique(sante$disease)), # Remplace par les vrais noms des facteurs
+                              choices = sort(unique(sante_new$disease)), # Remplace par les vrais noms des facteurs
                               selected = c("all-c"),
                               multiple = TRUE,
                               options = pickerOptions(
