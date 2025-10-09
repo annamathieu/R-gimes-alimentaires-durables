@@ -196,6 +196,43 @@ server <- function(input, output, session) {
     output$pca_env_plot <- renderPlot({
       env_pca_f(data = env_new, country = input$country_env)
     })
+
+
+  ###############################################################
+    # Onglet HEALTH ASPECTS
+    ###############################################################
+    
+    output$mortality_plot <- renderPlot({
+      
+      # On récupère les inputs
+      selected_countries <- input$selected_countries
+      selected_risk_factors <- input$selected_risk_factors
+      selected_scenarios <- input$selected_scenarios
+      selected_disease <- input$selected_disease
+      
+      req(selected_countries, selected_risk_factors, selected_scenarios, selected_disease) 
+      
+      stack_bars <- input$stack_bars
+
+      # Appel de la fonction avec les paramètres
+      plot_mortality_prc(
+        data = sante_new,
+        selected_risk_factors = selected_risk_factors,
+        selected_scenarios = selected_scenarios,
+        selected_countries = selected_countries,
+        selected_disease = selected_disease,
+        stack_bars = stack_bars
+      )
+    }, 
+    # Ajuster les marges
+    res = 96 # Résolution standard
+    )
+    
+    
+    # ---- HEALTH DATA TABLE ----
+    output$datatable_sante <- DT::renderDataTable({
+      print.health(sante_new)
+    })
     
     
     ###############################################################
