@@ -9,6 +9,7 @@ print.env <- function(data = env_new) {
   # Arrondir les colonnes numériques
   num_cols <- sapply(data, is.numeric)
   data[, num_cols] <- round(data[, num_cols], 2)
+  data[[ncol(data)]] <- data$phos
   
   # Création du tableau
   tab <- DT::datatable(
