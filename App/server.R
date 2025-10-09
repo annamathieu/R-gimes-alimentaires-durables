@@ -184,19 +184,18 @@ server <- function(input, output, session) {
       sel_data_env()
     })
     
-    # PCA ENVIRONMENTAL
-    output$pca_env_plot <- renderPlot({
-      env_pca_f(data = env_new, country = input$country_env)
+    
+    
+    # ---- ENVIRONMENTAL DATA TABLE ----
+    output$datatable_env <- DT::renderDataTable({
+      print.env(env_new)
     })
     
     
-    
-    # ENVIRONMENTAL DATA TABLE
-    
-    output$datatable_env <- DT::renderDataTable({
-      req(input$columns_env)
-      print.env(env_new[, input$columns_env, drop = FALSE])
-    }, server = TRUE)
+    # ---- PCA ENVIRONMENTAL ----
+    output$pca_env_plot <- renderPlot({
+      env_pca_f(data = env_new, country = input$country_env)
+    })
     
     
     ###############################################################
@@ -216,7 +215,7 @@ server <- function(input, output, session) {
           select(-item, -code_pays, -socio.econ.scenario, -grp_diet, -diet.scenario),
         sante_new %>%
           filter(parameter == "deaths_avd", disease == "all-c", code_pays == input$country_mfa) %>%
-          select(-grp_diet, -diet.scenario, -disease, -parameter, -code_pays, -`all-rf`)
+          select(-grp_diet, -diet.scenario, -disease, -parameter, -code_pays, -all-rf)
       )
       
       # Vérification
@@ -264,6 +263,9 @@ server <- function(input, output, session) {
         theme_minimal(base_size = 13) +
         theme(plot.title = element_text(face = "bold", hjust = 0.5))
     })
+    
+    
+    
     
     
     
