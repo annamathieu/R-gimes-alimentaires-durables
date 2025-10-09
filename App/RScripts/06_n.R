@@ -60,3 +60,5 @@ mfa_simple <- function(country = "FRP") {
   
   return(combined)
 }
+
+# mfa_simple()
