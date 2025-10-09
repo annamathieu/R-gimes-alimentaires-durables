@@ -8,6 +8,27 @@
   
 pca.nutri <- function (nutri_new, country = "FRP") {
   
+  colors.scenario <- c("mistyrose",  # ani-100
+                       "brown4",        # ani 25
+                       "indianred3",    # ani 50
+                       "pink2",          # ani 75
+                       "gray28",     # BMK 
+                       "olivedrab2",  # FLX
+                       "darkorange4", # kcal 100
+                       "orange",      # kcal 25
+                       "darkorange2",  # kcal 50
+                       "darkorange3",  # kcal 75
+                       
+                       "chartreuse3", "forestgreen", "darkgreen") # "PSC"      "VEG"      "VGN" 
+  
+  
+  names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75", 
+                             "BMK", 
+                             "FLX", 
+                             "kcal-100", "kcal-25", 
+                             "kcal-50" , "kcal-75", 
+                             "PSC", "VEG", "VGN") 
+  
   # # df to perform pca onto 
   # pca_data_nutri <- nutri_new %>% filter(item == "abs", code_pays=="FRP") 
   # pca_data_nutri <- pca_data_nutri[,-1]
@@ -69,4 +90,4 @@ pca.nutri <- function (nutri_new, country = "FRP") {
 }
 
 
-pca.nutri(nutri_new)
+# pca.nutri(nutri_new)
