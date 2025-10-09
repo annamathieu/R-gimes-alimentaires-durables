@@ -38,7 +38,7 @@ fluidPage(
   navbarPage(
     title = "Sustainable diet",
     
-    tabPanel(
+       tabPanel(
       title = "Introduction",
       fluidPage(
         tags$div(
@@ -767,4 +767,5 @@ fluidPage(
 =======
 )
 >>>>>>> c7d46227d4061168dd74d297638657dc9e5f4cf8
+
 
