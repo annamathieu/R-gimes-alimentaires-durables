@@ -386,41 +386,59 @@ fluidPage(
                width = 12,
                
                tabsetPanel(
-                 tabPanel("Data Manipulation",
-                          
-                          h3("Explore environmental dataset", 
-                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
-                          
-                          sidebarLayout(
-                            sidebarPanel(
-                              width = 2,
-                              h3("Use this tool bar to print environmental data"),
-                              h4("Columns"),
-                              pickerInput(
-                                inputId = "columns_env",
-                                label = NULL,
-                                choices = names(env_new),
-                                selected = names(env_new),
-                                options = pickerOptions(
-                                  actionsBox = TRUE,
-                                  liveSearch = TRUE,
-                                  noneSelectedText = "Select printed columns",
-                                  size = 5
-                                ),
-                                multiple = TRUE
-                              )
-                            ),
-                            
-                            mainPanel(
-                              tabPanel("Data Manipulation", DTOutput("datatable_env")),
-                              width = 10
-                            )
-                          )
+                 tabPanel(
+                   "Data Manipulation",
+                   
+                   h3(
+                     "Explore environmental dataset", 
+                     style = "text-align:center; font-weight:bold; margin-bottom:20px;"
+                   ),
+                   
+                   sidebarLayout(
+                     sidebarPanel(
+                       width = 3,
+                       
+                       h3("Use this tool bar to navigate through nutritional data"),
+                       tags$br(),
+                       
+                       tags$p("How to navigate data:"),
+                       
+                       # section socio-econ scenario
+                       tags$p("Socio-econ scenario :"),
+                       tags$ul(
+                         tags$li("SSP2 : middle-of-the-road socio-economic development pathway"),
+                         tags$li("SSP1 : pathway with greater income and lower population growth"),
+                         tags$li("SSP3 : pathway with greater population and lower income growth")
+                       ),
+                       
+                       # Item
+                       tags$p("Item :"),
+                       tags$ul(
+                         tags$li("abs : value in units"),
+                         tags$li("% rec : nutrient coverage in %, from nutritional recommendation"),
+                         tags$li("pct : % of change from BMK")
+                       ),
+                       
+                       # Diet scenario
+                       tags$p("Diet Scenario :"),
+                       tags$ul(
+                         tags$li("BMK: current diet"),
+                         tags$li("ani-25 => ani-100 : replacement from 25 to 100 % of animal-source foods with plant-based foods"),
+                         tags$li("kcal-25 => kcal-100: reduced levels of underweight, overweight, and obesity by 25–100%"),
+                         tags$li("FLX: Flexitarian, PSC: Pescovegetarian, VEG: Vegetarian, VGN: Vegan")
+                       )
+                     ),
+                     
+                     mainPanel(
+                       width = 9,
+                       DTOutput("datatable_env")
+                     )
+                   )
                  ),
                  
                  tabPanel("PCA",
                           
-                          # ---- Titre stylé et centré ----
+                          # Titre
                           tags$div(
                             "Principal Component Analysis of Environmental Indicators",
                             style = "text-align: center; 
@@ -431,7 +449,7 @@ fluidPage(
                           ),
                           
                           sidebarLayout(
-                            # ---- Barre latérale ----
+                            # Barre latérale
                             sidebarPanel(
                               h4("Use this tool to choose a country"),
                               selectInput(
@@ -442,7 +460,7 @@ fluidPage(
                               )
                             ),
                             
-                            # ---- Graphique principal ----
+                            # Graphique principal
                             mainPanel(
                               plotOutput("pca_env_plot", height = "600px")
                             )
