@@ -23,6 +23,21 @@ fluidPage(
       }
     ")),
   
+  tags$head(
+    tags$script(HTML("
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          document.documentElement.msRequestFullscreen();
+        }
+      });
+    "))
+  ), 
+  
+  
   # tags$head(tags$link (rel = "stylesheet", type = "text/css", href = "bootstrap.min.css")),
   #   tags$style(HTML("
   #     html, body, .tab-content, .tab-pane, .mainPanel {
