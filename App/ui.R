@@ -537,6 +537,118 @@ fluidPage(
     
     
   ),
+
+    ###############################################################
+  # Onglet HEALTH ASPECTS
+  ###############################################################
+  
+  tabPanel(title="Health aspects",
+           
+           mainPanel(
+             width = 12,
+             
+             tabsetPanel(
+               tabPanel("Data Manipulation",
+                        fluidRow(
+                          column(
+                            width = 12,
+                            style = "padding-left:40px; padding-right:40px;",
+                            DTOutput("datatable_sante", width = "100%")
+                          )
+                        )
+               ),
+               
+               tabPanel("PCA",
+                        plotOutput("acp_env_plot", height = "700px")
+               ),
+               
+               
+               tabPanel("Health data Vizualisation",
+                        sidebarLayout(
+                          sidebarPanel(
+                            width = 3,
+                            
+                            pickerInput(
+                              inputId = "selected_countries", 
+                              label = "Country",
+                              selected = "FRP",
+                              choices = sort(unique(sante$pays)),
+                              multiple = TRUE,
+                              options = pickerOptions(
+                                actionsBox = TRUE,
+                                liveSearch = TRUE,
+                                noneSelectedText = "No country selected (all countries)"
+                              )
+                            ),
+                            
+                            pickerInput(
+                              inputId = "selected_risk_factors",
+                              label = "Risk Factors",
+                              choices = c("all-rf", names(sante)[6:14]), # Remplace par les vrais noms des facteurs
+                              selected = c("all-rf"),
+                              multiple = TRUE,
+                              options = pickerOptions(
+                                actionsBox = TRUE,
+                                liveSearch = TRUE,
+                                noneSelectedText = "Select at least one risk factor"
+                              )
+                            ),
+                            
+                            pickerInput(
+                              inputId = "selected_scenarios",
+                              label = "Scenarios",
+                              choices = c("ani-25", "ani-50", "ani-75", "ani-100",
+                                          "kcal-25", "kcal-50", "kcal-75", "kcal-100",
+                                          "FLX", "PSC", "VEG", "VGN"),
+                              selected = c("ani-25", "ani-50", "ani-75", "ani-100",
+                              "kcal-25", "kcal-50", "kcal-75", "kcal-100",
+                              "FLX", "PSC", "VEG", "VGN"),
+                              multiple = TRUE,
+                              options = pickerOptions(
+                                actionsBox = TRUE,
+                                liveSearch = TRUE,
+                                noneSelectedText = "Select at least one scenario"
+                              )
+                            ),
+                            
+                            pickerInput(
+                              inputId = "selected_disease",
+                              label = "Disease",
+                              choices = sort(unique(sante$disease)), # Remplace par les vrais noms des facteurs
+                              selected = c("all-c"),
+                              multiple = TRUE,
+                              options = pickerOptions(
+                                actionsBox = TRUE,
+                                liveSearch = TRUE,
+                                noneSelectedText = "Select at least disease"
+                              )
+                            ),
+                            
+                            checkboxInput(
+                              inputId = "stack_bars",
+                              label = "Stack bars",
+                              value = TRUE
+                            )
+                          ),
+                          
+                          mainPanel(
+                            width = 9,
+                            div(
+                              style = "max-width: 100%; max-height: 100%; overflow: auto;",
+                              plotOutput("mortality_plot")
+                            )
+                            
+                          )
+                        )
+               )
+             )
+           )
+           
+           
+           
+           
+  ), # Fin
+    
   ###############################################################
   # Onglet GLOBAL ANALYSIS
   ###############################################################
@@ -576,3 +688,4 @@ fluidPage(
 )
 
 )
+
