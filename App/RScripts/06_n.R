@@ -3,12 +3,7 @@
 ##############################################################################
 
 mfa_simple <- function(country = "FRP") {
-  library(FactoMineR)
-  library(factoextra)
-  library(dplyr)
-  library(patchwork)
-  library(ggplot2)
-  
+
   #Création du jeu de données
   data.mfa <- cbind(
     nutri_new %>% 
