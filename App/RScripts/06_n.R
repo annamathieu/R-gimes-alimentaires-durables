@@ -2,7 +2,7 @@
 # FUNCTION : Simple MFA (base version)
 ##############################################################################
 
-mfa_simple <- function(country = "FRP", selectvar) {
+mfa_simple <- function(country = "FRP") {
 
   # creation du jeu de données data.mfa
   data.mfa <- cbind(
@@ -71,7 +71,7 @@ mfa_simple <- function(country = "FRP", selectvar) {
     # GRAPH DES VARIABLES 
   
   g2 <- plot.MFA(res.mfa.ns, choix = "var",
-                 select = selectvar,
+                 # select = selectvar,
                  lab.ind =  FALSE,
                  graph.type = "ggplot")
   
@@ -86,11 +86,23 @@ mfa_simple <- function(country = "FRP", selectvar) {
     
   
   # graph des groupes
-  g3 <- plot.MFA(res.mfa.ns, choix = 'group')
+  g3 <- plot.MFA(res.mfa.ns, choix = 'group',graph.type = "ggplot")
+  g3 <- g3 + 
+    labs(title = "Multidimensionality of groups") +
+    theme(
+      plot.title = element_text(size = 1, hjust = 0.55),
+      text = element_text(size = 12)
+    )
   
 
-  # graph des corrélations
-  g4 <- plot.MFA(res.mfa.ns, choix = 'axes')
+  # graph des individus partiels 
+  g4 <- plot.MFA(res.mfa.ns, choix = 'axes', graph.type = "ggplot")
+  g4 <- g4 + 
+    labs(title = "Partial individuals under the point of view of groups") +
+    theme(
+      plot.title = element_text(size = 1, hjust = 0.55),
+      text = element_text(size = 12)
+    )
   
   
   return(list(g1,g2,g3,g4))
@@ -98,4 +110,4 @@ mfa_simple <- function(country = "FRP", selectvar) {
 }
 
 
-res <- mfa_simple(selectvar = names(data.mfa))
+# res <- mfa_simple(selectvar = names(data.mfa))

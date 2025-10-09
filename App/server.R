@@ -208,27 +208,6 @@ server <- function(input, output, session) {
       
       mfa_simple(country= input$country_mfa)
       
-      # 
-      # data.mfa <- cbind(
-      #   nutri_new %>%
-      #     filter(item == "abs", code_pays == input$country_mfa, diet.scenario != "BMK") %>%
-      #     select(-item, -code_pays, -grp_diet),
-      #   env_new %>%
-      #     filter(item == "abs", code_pays == input$country_mfa, socio.econ.scenario == "SSP2", diet.scenario != "BMK") %>%
-      #     select(-item, -code_pays, -socio.econ.scenario, -grp_diet, -diet.scenario),
-      #   sante_new %>%
-      #     filter(parameter == "deaths_avd", disease == "all-c", code_pays == input$country_mfa) %>%
-      #     select(-grp_diet, -diet.scenario, -disease, -parameter, -code_pays, -all-rf)
-      # )
-      # 
-      # # Vérification
-      # if (nrow(data.mfa) == 0) return(NULL)
-      # 
-      # MFA(data.mfa,
-      #     group = c(1, 24, 5, 9),
-      #     type = c("n", "s", "s", "s"),
-      #     name.group = c("diet", "nutritional", "environmental", "health"),
-      #     num.group.sup = 1)
     })
     
     
@@ -237,7 +216,7 @@ server <- function(input, output, session) {
       res_mfa()[[1]] 
     })
     
-    output$plot_mfa_group <- renderPlot({
+    output$plot_mfa_var <- renderPlot({
       res_mfa()[[2]] 
     })    
     

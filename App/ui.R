@@ -58,7 +58,7 @@ fluidPage(
           tags$p(
             "This Shiny app makes those findings interactive and explorable — allowing users 
         to visualize, for each country, how adopting alternative diet scenarios could 
-        simultaneously improve health, nutrition, and environmental outcomes."
+        simultaneously improve health, nutrition, and environmental outcomes, taking consideration of regional variations."
           ),
           tags$br(), 
           tags$em("Data from:"),
@@ -71,9 +71,9 @@ fluidPage(
             tabPanel("Study Objectives", 
                      tags$p("The study aimed to integrate three domains:"),
                      tags$ul(
-                       tags$li(tags$b("Nutrition:"), " evaluate dietary adequacy and nutrient intake."),
-                       tags$li(tags$b("Health:"), " estimate mortality changes linked to diet and body weight."),
-                       tags$li(tags$b("Environment:"), " assess resource use and emissions from food production.")
+                       tags$li(tags$b("Nutrition:"), "calculation of nutrient intake and changes in adequacy based on international recommendations ."),
+                       tags$li(tags$b("Health:"), " estimation of changes in mortality changescomparative risk assessment with nine diet and weight-related risk factors."),
+                       tags$li(tags$b("Environment:"), " analysis of the relationship between the health and environmental impacts of dietary change with a combined country-specific and food group-specific .")
                      ),
                      tags$p(
                        "The analysis compares current national diets with sustainable diet strategies 
@@ -83,29 +83,91 @@ fluidPage(
           
            tabPanel(" Dietary Scenario", 
                     tags$p("The study modeled three broad strategies for transitioning toward sustainable diets:"),
-                    tags$ol(
-                      tags$li(tags$b("Environmental focus –"), 
-                              " reducing animal-source foods by 25–100% to lower emissions and land use."),
-                      tags$li(tags$b("Food-security focus –"), 
-                              " reducing underweight, overweight, and obesity by 25–100%."),
-                      tags$li(tags$b("Health focus –"), 
-                              " adopting balanced diets (flexitarian, pescatarian, vegetarian, or vegan).")
-                    ),
-                    tags$p(
-                      "All scenarios assume energy-balanced diets, adjusted to local food availability 
-        and consumption patterns."
-                    )),
-           
+                    
+                    tags$ul(
+                      
+                      tags$li(tags$b("Environmental objectives => reduction of animal-source foods"), 
+                              tags$p("Reducing animal-source foods to lower emissions and land use"), 
+                              tags$p("Replacement of 25–100% of animal-source foods with plant-based ones at constant total calorie intake, replacements consistinfg of 75% legumes and 25% fruits and vegetables"),
+                              tags$ul(
+                                tags$li("ani-25 : Replacement of 25 % of animal-source foods with plant-based ones "),
+                                tags$li("ani-50 : Replacement of 50 % of animal-source foods with plant-based ones "),
+                                tags$li("ani-75 : Replacement of 75 % of animal-source foods with plant-based ones "),
+                                tags$li("ani-100 : Replacement of 100 % of animal-source foods with plant-based ones ")
+                                
+                              ), 
+                      tags$br(),
+                      
+                      tags$li(tags$b("Food-security objectives => improving calorie intake and weight levels"), 
+                              tags$p("Improvement of 25–100% in energy imbalances with simultaneous reductions in underweight, overweight, and obesity (progressive reductions levels)"),
+                              tags$p("Calculation details :  For adjusting total energy intake, we applied scaling factors to baseline diets that preserved their composition"),
+                              tags$ul(
+                                tags$li("kcal-25 : reduced levels of 25 % of underweight, overweight, and obesity "), 
+                                tags$li("kcal-50 : reduced levels of 50 % of underweight, overweight, and obesity "), 
+                                tags$li("kcal-75 : reduced levels of 75 % of underweight, overweight, and obesity "), 
+                                tags$li("kcal-100 : reduced levels of 100 % of underweight, overweight, and obesity ") 
+                                
+                                      )
+                              
+                      ),      
+                      
+                      tags$br(), 
+                      
+                      tags$li(tags$b("Public health objectives => balanced diet patterns"), 
+                              tags$ul(
+                                tags$li("FLX : Flexitarian Diet : No processed meat, low amounts of red meat (including beef, lamb, and pork) and sugar, moderate amounts of poultry, dairy, and fish, and generous amounts of fruits, vegetables, legumes, and nuts"), 
+                                tags$li("PSC : Pescovegetarian Diet : Meat is replaced with 2/3 fish and seafood and 1/3 fruits and vegetables"), 
+                                tags$li("VEG : Vegetarian Diet : Meat is replaced with 2/3 legumes and 1/3 fruits and vegetables "), 
+                                tags$li("VGN : Vegan Diet : All animal sources replaced with 2/3 legumes 1/3 fruits and vegetables ")
+                              )
+                                      
+                      )           
+                              ),
+                      tags$br(), 
+                      tags$br() 
+                      
+
+           )),
            tabPanel("Health Impacts", 
-                    tags$p(
-                      "Health effects were estimated using a comparative risk assessment model 
+                    tags$p("Health effects were estimated using a comparative risk assessment model 
         including nine diet- and weight-related risk factors 
-        (e.g., fruit, vegetable, meat, sugar intake, and body weight distribution)."
-                    )), 
+        (e.g., fruit, vegetable, meat, sugar intake, and body weight distribution)."),
+                    tags$p("Methodology : Mortality and disease burden estimated via population impact fractions applied to age- and country-specific mortality rates
+"),
+                      
+                      tags$br(),
+                    
+                      tags$p("Comparative risk assessment framework with nine risk factors"), 
+                    tags$ul(
+                      tags$li("High consumption of red meat"), 
+                      tags$li("Low consumption of fruits, vegetables, nuts and seeds, fish, legumes"), 
+                      tags$li("Underweight (BMI <18.5), overweight (BMI ≥25 to <30), obese (BMI ≥30)")), 
+                      
+                      tags$br(), 
+                      
+                      tags$p("They studied the influence of these risk factors for the following disease: "), 
+                      tags$ul(
+                        tags$li("CHD : coronary heart disease"), 
+                        tags$li("stroke"), 
+                        tags$li("type 2 diabetes"), 
+                        tags$li("cancer (aggregate and site-specific)"), 
+                        tags$li("other : other weight-related causes")
+                        
+                      ),
+                      
+                    tags$br(), 
+                    tags$br()    
+
+                      
+                    ), 
            
            
            tabPanel(" Environmental Impact Indicators", 
-                    tags$p("Five environmental dimensions were analyzed:"),
+                    
+                    tags$p("The methodology implied using a food-systems model that connects food consumption and production across regions, and we paired the production estimates with country-specific indicators"), 
+                    
+                    
+                    tags$p("Five environmental indicators were analyzed:"),
                     tags$ul(
                       tags$li("Greenhouse gas emissions (CO₂ eq)"),
                       tags$li("Cropland use"),
@@ -121,7 +183,6 @@ fluidPage(
                       tags$li("Display the country-level results from Springmann et al. (2018)."),
                       tags$li("Let users select a country and explore baseline health, nutrition, and environmental data."),
                       tags$li("Apply different diet scenarios and visualize projected outcomes."),
-                      tags$li("Compare results across strategies, highlighting synergies and trade-offs."),
                       tags$li("Facilitate understanding of how dietary transitions can contribute to a healthier population and a more sustainable planet.")
                       )
             
@@ -543,18 +604,33 @@ fluidPage(
              
              mainPanel(
                tabsetPanel(
-                 tabPanel("Individuals", plotOutput("plot_mfa_ind")),
-                 tabPanel("Groups", plotOutput("plot_mfa_group")),
-                 tabPanel("Correlation Circle", plotOutput("plot_mfa_score")),
-                 tabPanel("Partial Individuals", plotOutput("plot_mfa_partial"))
-               )
+               tabPanel("Groups", plotOutput("plot_mfa_score",  height = "600px")),
+               tabPanel(
+                 "Variables and individuals",
+                 fluidRow(
+                   column(
+                     width = 12,
+                     plotOutput("plot_mfa_ind", height = "90vh")  # 90% of screen height
+                   )
+                 ),
+                 fluidRow(
+                   column(
+                     width = 12,
+                     plotOutput("plot_mfa_var", height = "90vh")
+                   )
+                 )
+               ),
+                tabPanel("Partial Individuals", plotOutput("plot_mfa_partial", height = "600px"))
+               )) 
+               
+               
              )
            )
-  )
+  ))
   
   
   
   
-)
 
-)
+
+
