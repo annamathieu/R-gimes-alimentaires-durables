@@ -15,6 +15,7 @@ print.env <- function(data = env_new) {
     data,
     rownames = FALSE,
     colnames = c(
+      "socio-econ scenario",
       "Item",
       "Diet scenario",
       "Country code",
