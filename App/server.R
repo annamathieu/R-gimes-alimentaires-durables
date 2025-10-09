@@ -94,18 +94,18 @@ server <- function(input, output, session) {
   ################################ data table nutri ###################################
   
   # sélection des columns 
-  select_coldatatable <- reactive({
-    req(input$columnsdatanutri)
-    req(length(input$columnsdatanutri) > 0)
-    
-    
-    print.nutri (nutri_new[,input$columnsdatanutri, drop = F]) # on sélectionne les colonnes selectionnées par l'utilisateur
-    # Quand une seule colonne est sélectionné=> drop = F évite d'avoir un résultat sous forme de vecteur 
-    
-  })
+  # select_coldatatable <- reactive({
+  #   req(input$columnsdatanutri)
+  #   req(length(input$columnsdatanutri) > 0)
+  #   
+  #   
+  #   print.nutri (nutri_new[,input$columnsdatanutri, drop = F]) # on sélectionne les colonnes selectionnées par l'utilisateur
+  #   # Quand une seule colonne est sélectionné=> drop = F évite d'avoir un résultat sous forme de vecteur 
+  #   
+  # })
   
   output$datatablenutri <- DT::renderDataTable({
-    select_coldatatable() 
+    print.nutri(nutri_new) 
     
   },  server = T)
   
