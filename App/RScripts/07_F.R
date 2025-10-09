@@ -2,12 +2,12 @@
 
 plot_mortality_prc <- function(
     data,
-    code_pays_selectionne = c("all-r"),
-    facteurs_de_risque = c("all-rf"),
-    scenarios_selectionnes = c("ani-25", "ani-50", "ani-75", "ani-100", 
+    selected_countries = c("all-r"),
+    selected_risk_factors = c("all-rf"),
+    selected_scenarios = c("ani-25", "ani-50", "ani-75", "ani-100", 
                                "kcal-25", "kcal-50", "kcal-75", "kcal-100",
                                "FLX", "PSC", "VEG", "VGN"),
-    maladie = "all-c", 
+    selected_disease = "all-c", 
     stack_bars = TRUE 
 ) {
   
@@ -41,27 +41,27 @@ plot_mortality_prc <- function(
   
   # --- 2. Vérifications et filtrage des données ---
   
-  # 2.1. Filtrage initial : Paramètre, Pays, Maladie, Scénarios
+  # 2.1. Filtrage initial : Paramètre, Pays, selected_disease, Scénarios
   data_filtree <- data %>%
     filter(
       parameter == "%deaths_avd_prm/all",
-      code_pays == code_pays_selectionne,
-      disease == maladie,
-      diet.scenario %in% scenarios_selectionnes
+      code_pays == selected_countries,
+      disease == selected_disease,
+      diet.scenario %in% selected_scenarios
     ) %>%
     # Vérifier l'ordre des scénarios
     mutate(diet.scenario = factor(diet.scenario, levels = ordre_scenarios))
   
   if (nrow(data_filtree) == 0) {
-    stop("Aucune donnée trouvée pour les critères de sélection (pays, maladie, scénarios).")
+    stop("Aucune donnée trouvée pour les critères de sélection (pays, selected_disease, scénarios).")
   }
   
   # 2.2. Vérification de la sélection de risque
-  has_all_rf <- "all-rf" %in% facteurs_de_risque
-  facteurs_a_analyser <- intersect(facteurs_de_risque, c("all-rf", facteurs_individuels))
+  has_all_rf <- "all-rf" %in% selected_risk_factors
+  facteurs_a_analyser <- intersect(selected_risk_factors, c("all-rf", facteurs_individuels))
   
   # La variable 'all-rf' ne peut pas être empilée avec les risques individuels.
-  if (has_all_rf && any(facteurs_de_risque %in% facteurs_individuels)) {
+  if (has_all_rf && any(selected_risk_factors %in% facteurs_individuels)) {
     message(paste0("Attention: La variable 'all-rf' sera traitée séparément (comme un point) et ne sera pas empilée avec les risques individuels. Seuls les facteurs individuels (<= ", length(facteurs_individuels), " sont empilés."))
   }
   
@@ -83,7 +83,7 @@ plot_mortality_prc <- function(
       values_to = "contribution"
     ) %>%
     # Filtrer uniquement les facteurs individuels demandés
-    filter(facteur_risque %in% intersect(facteurs_de_risque, facteurs_individuels)) %>%
+    filter(facteur_risque %in% intersect(selected_risk_factors, facteurs_individuels)) %>%
     filter(!is.na(contribution))
   
   # Détermination du mode d'affichage
@@ -171,9 +171,9 @@ plot_mortality_prc <- function(
     # 4.3. Thème et titres généraux
     titre_graphe <- paste0(
       "% Réduction de Mortalité Prématurée (", 
-      maladie, 
+      selected_disease, 
       ") par Scénario Diététique\n", 
-      "Pays: ", nom_pays, " (", code_pays_selectionne, ")"
+      "Pays: ", nom_pays, " (", selected_countries, ")"
     )
     
     graphique <- graphique +
@@ -200,7 +200,7 @@ plot_mortality_prc <- function(
       geom_bar(stat = "identity", fill = color_all_rf, alpha = 0.8) +
       geom_text(aes(label = round(`all-rf`, 1)), vjust = -1, color = "black") +
       labs(
-        title = paste0("% Réduction de Mortalité Prématurée (", maladie, ") - Facteurs Agrégés ('all-rf')\nPays: ", nom_pays, " (", code_pays_selectionne, ")"),
+        title = paste0("% Réduction de Mortalité Prématurée (", selected_disease, ") - Facteurs Agrégés ('all-rf')\nPays: ", nom_pays, " (", selected_countries, ")"),
         x = "Scénario Diététique",
         y = "% Réduction de Mortalité Prématurée ('all-rf')"
       ) +
@@ -230,15 +230,15 @@ facteur_risques <- c("fruits", "nuts_seeds", "legumes", "fish", "r+p_meat", "und
 
 plot_mortality_prc(
   data = sante, 
-  code_pays_selectionne = "FRP",
-  facteurs_de_risque = c(facteur_risques, "all-rf"),# Scénarios choisis
+  selected_countries = "FRP",
+  selected_risk_factors = c(facteur_risques, "all-rf"),# Scénarios choisis
   stack_bars = F
 )
 
 plot_mortality_prc(
   data = sante, 
-  code_pays_selectionne = c("USA"),
-  facteurs_de_risque = c("underweight", "overweight", "obese"),
-  maladie = "all-c",
+  selected_countries = c("USA"),
+  selected_risk_factors = c("underweight", "overweight", "obese"),
+  selected_disease = "all-c",
   stack_bars = F
 )
