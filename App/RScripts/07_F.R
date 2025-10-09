@@ -1,3 +1,6 @@
+#####----------------------------------------------------------------------#####
+##    FUNCTION : PLOT DATA HEALTH
+#####----------------------------------------------------------------------#####
 
 
 plot_mortality_prc <- function(
@@ -5,15 +8,15 @@ plot_mortality_prc <- function(
     selected_countries = c("all-r"),
     selected_risk_factors = c("all-rf"),
     selected_scenarios = c("ani-25", "ani-50", "ani-75", "ani-100", 
-                               "kcal-25", "kcal-50", "kcal-75", "kcal-100",
-                               "FLX", "PSC", "VEG", "VGN"),
+                           "kcal-25", "kcal-50", "kcal-75", "kcal-100",
+                           "FLX", "PSC", "VEG", "VGN"),
     selected_disease = "all-c", 
     stack_bars = TRUE 
 ) {
   
-  # --- 1. Définition des constantes et des palettes ---
+  # --- Définition des constantes et des palettes ---
   
-  # Ordre souhaité pour les scénarios
+  # Ordre des scénarios
   ordre_scenarios <- c("ani-25", "ani-50", "ani-75", "ani-100", 
                        "kcal-25", "kcal-50", "kcal-75", "kcal-100",
                        "FLX", "PSC", "VEG", "VGN")
@@ -39,9 +42,9 @@ plot_mortality_prc <- function(
   # Liste de tous les facteurs individuels (pour le pivotage et l'empilement)
   facteurs_individuels <- names(colors_for_factors)
   
-  # --- 2. Vérifications et filtrage des données ---
+  # --- Vérifications et filtrage des données ---
   
-  # 2.1. Filtrage initial : Paramètre, Pays, selected_disease, Scénarios
+  # Filtrage : Paramètre, Pays, selected_disease, Scénarios
   data_filtree <- data %>%
     filter(
       parameter == "%deaths_avd_prm/all",
@@ -56,27 +59,26 @@ plot_mortality_prc <- function(
     stop("Aucune donnée trouvée pour les critères de sélection (pays, selected_disease, scénarios).")
   }
   
-  # 2.2. Vérification de la sélection de risque
+  # Vérification de la sélection de risque
   has_all_rf <- "all-rf" %in% selected_risk_factors
   facteurs_a_analyser <- intersect(selected_risk_factors, c("all-rf", facteurs_individuels))
   
-  # La variable 'all-rf' ne peut pas être empilée avec les risques individuels.
+  # La variable 'all-rf' ne doit pas être empilée avec les risques individuels.
   if (has_all_rf && any(selected_risk_factors %in% facteurs_individuels)) {
     message(paste0("Attention: La variable 'all-rf' sera traitée séparément (comme un point) et ne sera pas empilée avec les risques individuels. Seuls les facteurs individuels (<= ", length(facteurs_individuels), " sont empilés."))
   }
   
-  # --- 3. Préparation des données pour la visualisation ---
+  # --- Préparation des données pour la visualisation ---
   
-  # 3.1. Séparation des facteurs individuels et de 'all-rf'
+  # Séparation des facteurs individuels et de 'all-rf'
   
   data_all_rf <- data_filtree %>%
     select(diet.scenario, `all-rf`) %>%
-    # Suppression des NA, au cas où
     filter(!is.na(`all-rf`))
   
   data_individuels <- data_filtree %>%
     select(diet.scenario, all_of(facteurs_individuels)) %>%
-    # Pivotage des facteurs individuels (format long)
+    # Pivoter les facteurs individuels
     pivot_longer(
       cols = all_of(facteurs_individuels),
       names_to = "facteur_risque",
@@ -86,21 +88,19 @@ plot_mortality_prc <- function(
     filter(facteur_risque %in% intersect(selected_risk_factors, facteurs_individuels)) %>%
     filter(!is.na(contribution))
   
-  # Détermination du mode d'affichage
+  # Déterminer le mode d'affichage
   nb_risques_individuels <- length(unique(data_individuels$facteur_risque))
   
-  # --- 4. Création du graphique ---
+  # --- Création du graphique ---
   
   # Nom complet du pays
   nom_pays <- unique(data_filtree$pays)
   
   # Déterminer si on utilise un graphique empilé ou séparé
-  # Empilement si plus d'un facteur individuel ou tous les facteurs individuels sont sélectionnés
   if (nb_risques_individuels > 0) {
     
     graphique <- ggplot(data_individuels, aes(x = diet.scenario, y = contribution))
     
-    # 4.1. Logique d'empilement vs. Facet Wrap
     if (stack_bars == TRUE || nb_risques_individuels > 8) {
       # Mode Empilement (ou une seule barre)
       graphique <- graphique +
@@ -110,34 +110,33 @@ plot_mortality_prc <- function(
           position = "stack", 
           alpha = 0.8
         ) +
-        labs(y = "% Réduction de Mortalité Prématurée")
+        labs(y = "% Reduction in Premature Mortality")
       
       # Si empilé, on ne met la légende qu'une seule fois
       graphique <- graphique +
         scale_fill_manual(
           values = colors_for_factors[unique(data_individuels$facteur_risque)],
-          name = "Facteur de Risque"
+          name = "Risk Factor"
         )
       
     } else {
-      # Mode Facet Wrap (stack_bars = FALSE et nb_risques_individuels > 1)
+      # Mode Facet Wrap
       graphique <- graphique +
         geom_bar(
-          aes(fill = facteur_risque), # Fill est utilisé pour la couleur de la barre dans le facet
+          aes(fill = facteur_risque),
           stat = "identity", 
           alpha = 0.8
         ) +
         # Un graphique par facteur de risque
         facet_wrap(~ facteur_risque, scales = "free_y", ncol = 3) +
-        labs(y = "% Réduction de Mortalité Prématurée (Échelle par Facteur)") +
-        # Utiliser la palette de couleurs pour le remplissage des barres dans chaque facet
+        labs(y = "% Reduction in Premature Mortality (Scale by Factor)") +
         scale_fill_manual(
           values = colors_for_factors[unique(data_individuels$facteur_risque)]
         ) +
-        guides(fill = "none") # Supprimer la légende 'fill' car elle est redondante
+        guides(fill = "none") # Supprimer la légende 'fill'
     }
     
-    # 4.2. Ajout de la valeur 'all-rf' (comme point)
+    # Ajout de la valeur 'all-rf' (comme point)
     if (has_all_rf && nb_risques_individuels > 8) {
       
       # Si on est en mode Facet Wrap, on ajoute les points à TOUS les facets
@@ -168,21 +167,21 @@ plot_mortality_prc <- function(
       
     }
     
-    # 4.3. Thème et titres généraux
+    # Thème et titres généraux
     titre_graphe <- paste0(
-      "% Réduction de Mortalité Prématurée (", 
+      "% Reduction in Premature Mortality (", 
       selected_disease, 
-      ") par Scénario Diététique\n", 
-      "Pays: ", nom_pays, " (", selected_countries, ")"
+      ") by Diet \n", 
+        "Country: ", nom_pays, " (", selected_countries, ")"
     )
     
     graphique <- graphique +
       labs(
         title = titre_graphe,
-        x = "Scénario Diététique",
+        x = "Diet",
         caption = ifelse(
           has_all_rf && nrow(data_all_rf) > 0,
-          paste0("Les points ", color_all_rf, " (losanges) représentent la réduction totale ('all-rf')."),
+          paste0("The dots ", color_all_rf, " (diamonds) represent the total reduction ('all-rf')."),
           ""
         )
       ) +
@@ -200,9 +199,9 @@ plot_mortality_prc <- function(
       geom_bar(stat = "identity", fill = color_all_rf, alpha = 0.8) +
       geom_text(aes(label = round(`all-rf`, 1)), vjust = -1, color = "black") +
       labs(
-        title = paste0("% Réduction de Mortalité Prématurée (", selected_disease, ") - Facteurs Agrégés ('all-rf')\nPays: ", nom_pays, " (", selected_countries, ")"),
-        x = "Scénario Diététique",
-        y = "% Réduction de Mortalité Prématurée ('all-rf')"
+        title = paste0("% Reduction in Premature Mortality (", selected_disease, ") - Facteurs Agrégés ('all-rf')\nPays: ", nom_pays, " (", selected_countries, ")"),
+        x = "Diet",
+        y = "% Reduction in Premature Mortality ('all-rf')"
       ) +
       theme_minimal() +
       theme(
