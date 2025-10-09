@@ -54,7 +54,7 @@ fluidPage(
     title = "Sustainable diet",
     
        tabPanel(
-      title = "Introduction",
+      title = "Home",
       fluidPage(
         tags$div(
           style = "max-width: 1500px; margin: auto; font-size: 16px; line-height: 1.6;",
@@ -648,8 +648,8 @@ fluidPage(
                               inputId = "selected_countries", 
                               label = "Country",
                               selected = "FRP",
-                              choices = sort(unique(sante_new$pays)),
-                              multiple = TRUE,
+                              choices = sort(unique(sante_new$code_pays)),
+                              multiple = F,
                               options = pickerOptions(
                                 actionsBox = TRUE,
                                 liveSearch = TRUE,
@@ -708,11 +708,8 @@ fluidPage(
                           ),
                           
                           mainPanel(
-                            width = 9,
-                            div(
-                              style = "max-width: 100%; max-height: 100%; overflow: auto;",
-                              plotOutput("mortality_plot")
-                            )
+                            width = 9, tabPanel("Health data Vizualisation",plotOutput("mortality_plot", height="600px"))
+   
                             
                           )
                         )
@@ -765,7 +762,7 @@ fluidPage(
                    )
                  )
                ),
-                tabPanel("Partial Individuals", plotOutput("plot_mfa_partial", height = "600px"))
+                tabPanel("Correlation circle", plotOutput("plot_mfa_partial", height = "600px"))
                )) 
                
                
