@@ -21,6 +21,7 @@ library(factoextra)         # personnalisation graphiques d'analyse factorielle
 
 library(DT)                 # Data tables 
 library(shinythemes)        # shiny theme
+library(htmltools)
 
 #####----------------------------------------------------------------------#####
 
@@ -46,6 +47,7 @@ nutri_new <- readRDS(file = "data/nutri_new.rds")
 sante_new <- readRDS(file = "data/sante_new.rds")
 env_new <- readRDS(file = "data/env_new.rds")
 conti<- readRDS(file = "data/conti.rds")
+data_disease <- readRDS(file = "data/data_disease.rds")
 
 #####----------------------------------------------------------------------#####
 
@@ -91,7 +93,9 @@ source("RScripts/02_n.R")     # fct DATA TABLE ENV
 source("RScripts/04_a.R")    #fct pca nutri 
 source("RScripts/03_n.R")     # fct PCA ENV
 source("RScripts/04_n.R")     # fct PCA ENV
-source("RScripts/06_n.R")     # fct MFA 
+source("RScripts/06_n.R")     # fct MFA
+source("RScripts/05_F.R")     # fct PRINT HEALTH
+source("RScripts/07_F.R")     # fct HEALTH 
  
 
 #####----------------------------------------------------------------------#####

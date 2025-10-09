@@ -222,23 +222,23 @@ plot_mortality_prc <- function(
 
 
 
-facteur_risques <- c("vegetables", "fruits", "nuts_seeds", "legumes", "fish", "r+p_meat", "underweight", "overweight", "obese")
+# facteur_risques <- c("vegetables", "fruits", "nuts_seeds", "legumes", "fish", "r+p_meat", "underweight", "overweight", "obese")
+# 
+# facteur_risques <- c("fruits", "nuts_seeds", "legumes", "fish", "r+p_meat", "underweight", "overweight", "obese")
+# 
 
-facteur_risques <- c("fruits", "nuts_seeds", "legumes", "fish", "r+p_meat", "underweight", "overweight", "obese")
-
-
-
-plot_mortality_prc(
-  data = sante, 
-  selected_countries = "FRP",
-  selected_risk_factors = c(facteur_risques, "all-rf"),# Scénarios choisis
-  stack_bars = F
-)
-
-plot_mortality_prc(
-  data = sante, 
-  selected_countries = c("USA"),
-  selected_risk_factors = c("underweight", "overweight", "obese"),
-  selected_disease = "all-c",
-  stack_bars = F
-)
+# 
+# plot_mortality_prc(
+#   data = sante_new, 
+#   selected_countries = "FRP",
+#   selected_risk_factors = c(facteur_risques, "all-rf"),# Scénarios choisis
+#   stack_bars = F
+# )
+# 
+# plot_mortality_prc(
+#   data = sante_new, 
+#   selected_countries = c("USA"),
+#   selected_risk_factors = c("underweight", "overweight", "obese"),
+#   selected_disease = "all-c",
+#   stack_bars = F
+# )

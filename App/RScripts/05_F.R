@@ -2,7 +2,7 @@
 # FUNCTION : PRINT HEALTH DATA TABLE
 ##############################################################################
 
-print.sante <- function(data) {
+print.health <- function(data) {
   library(DT)
   
   num_cols <- sapply(data, is.numeric)

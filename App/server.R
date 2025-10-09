@@ -196,6 +196,43 @@ server <- function(input, output, session) {
     output$pca_env_plot <- renderPlot({
       env_pca_f(data = env_new, country = input$country_env)
     })
+
+
+  ###############################################################
+    # Onglet HEALTH ASPECTS
+    ###############################################################
+    
+    output$mortality_plot <- renderPlot({
+      
+      # On récupère les inputs
+      selected_countries <- input$selected_countries
+      selected_risk_factors <- input$selected_risk_factors
+      selected_scenarios <- input$selected_scenarios
+      selected_disease <- input$selected_disease
+      
+      req(selected_countries, selected_risk_factors, selected_scenarios, selected_disease) 
+      
+      stack_bars <- input$stack_bars
+
+      # Appel de la fonction avec les paramètres
+      plot_mortality_prc(
+        data = sante_new,
+        selected_risk_factors = selected_risk_factors,
+        selected_scenarios = selected_scenarios,
+        selected_countries = selected_countries,
+        selected_disease = selected_disease,
+        stack_bars = stack_bars
+      )
+    }, 
+    # Ajuster les marges
+    res = 96 # Résolution standard
+    )
+    
+    
+    # ---- HEALTH DATA TABLE ----
+    output$datatable_sante <- DT::renderDataTable({
+      print.health(sante_new)
+    })
     
     
     ###############################################################
@@ -208,27 +245,6 @@ server <- function(input, output, session) {
       
       mfa_simple(country= input$country_mfa)
       
-      # 
-      # data.mfa <- cbind(
-      #   nutri_new %>%
-      #     filter(item == "abs", code_pays == input$country_mfa, diet.scenario != "BMK") %>%
-      #     select(-item, -code_pays, -grp_diet),
-      #   env_new %>%
-      #     filter(item == "abs", code_pays == input$country_mfa, socio.econ.scenario == "SSP2", diet.scenario != "BMK") %>%
-      #     select(-item, -code_pays, -socio.econ.scenario, -grp_diet, -diet.scenario),
-      #   sante_new %>%
-      #     filter(parameter == "deaths_avd", disease == "all-c", code_pays == input$country_mfa) %>%
-      #     select(-grp_diet, -diet.scenario, -disease, -parameter, -code_pays, -all-rf)
-      # )
-      # 
-      # # Vérification
-      # if (nrow(data.mfa) == 0) return(NULL)
-      # 
-      # MFA(data.mfa,
-      #     group = c(1, 24, 5, 9),
-      #     type = c("n", "s", "s", "s"),
-      #     name.group = c("diet", "nutritional", "environmental", "health"),
-      #     num.group.sup = 1)
     })
     
     
@@ -237,7 +253,7 @@ server <- function(input, output, session) {
       res_mfa()[[1]] 
     })
     
-    output$plot_mfa_group <- renderPlot({
+    output$plot_mfa_var <- renderPlot({
       res_mfa()[[2]] 
     })    
     
