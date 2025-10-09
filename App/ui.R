@@ -406,9 +406,9 @@ fluidPage(
                        # section socio-econ scenario
                        tags$p("Socio-econ scenario :"),
                        tags$ul(
-                         tags$li("SSP2 : middle-of-the-road socio-economic development pathway"),
-                         tags$li("SSP1 : pathway with greater income and lower population growth"),
-                         tags$li("SSP3 : pathway with greater population and lower income growth")
+                         tags$li("SSP2 : middle-of-the-road pathway"),
+                         tags$li("SSP1 : greater income and lower population growth"),
+                         tags$li("SSP3 : greater population and lower income growth")
                        ),
                        
                        # Item
