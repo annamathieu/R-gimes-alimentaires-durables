@@ -525,8 +525,10 @@ fluidPage(
   
   tabPanel("Global Analysis",
            
-           # Titre centré
-           titlePanel("Multiple Factor Analysis (MFA) on All Domains: Nutritional, Environmental, and Health"),
+           
+           h3("Multiple Factor Analysis (MFA) on All Domains: Nutritional, Environmental, and Health", 
+              style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+           
            
            sidebarLayout(
              sidebarPanel(
@@ -541,10 +543,10 @@ fluidPage(
              
              mainPanel(
                tabsetPanel(
-                 tabPanel("Individuals", plotOutput("plot_ind")),
-                 tabPanel("Groups", plotOutput("plot_groups")),
-                 tabPanel("Correlation Circle", plotOutput("plot_corr")),
-                 tabPanel("Partial Individuals", plotOutput("plot_partial"))
+                 tabPanel("Individuals", plotOutput("plot_mfa_ind")),
+                 tabPanel("Groups", plotOutput("plot_mfa_group")),
+                 tabPanel("Correlation Circle", plotOutput("plot_mfa_score")),
+                 tabPanel("Partial Individuals", plotOutput("plot_mfa_partial"))
                )
              )
            )
