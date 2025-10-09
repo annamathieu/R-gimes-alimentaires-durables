@@ -18,7 +18,7 @@ env_partition <- function(domains = c("GHGe", "land", "water", "nitr", "phos"), 
                           regimes = levels(env_new$diet.scenario),               # régimes à inclure
                           item = "pct",                                          # type de valeur : abs / pct
                           ncol = 3,                                              # nombre de colonnes d'affichage
-                          title = "Comparaison du % de changement de chaque indicateur environnemental par régime alimentaire") {
+                          title = "% of change in each environmental indicator by diet") {
   
   # Sécurisation ncol pour éviter l’erreur “argument non numérique…”
   ncol <- as.integer(ncol)
