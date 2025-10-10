@@ -516,7 +516,7 @@ fluidPage(
                           
                           # Titre
                           tags$div(
-                            "Principal Component Analysis of Environmental Indicators",
+                            "Principal Composant Analysis of Environmental Indicators",
                             style = "text-align: center; 
              font-weight: bold; 
              font-size: 20px; 
