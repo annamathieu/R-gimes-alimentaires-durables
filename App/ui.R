@@ -683,7 +683,7 @@ fluidPage(
                tabPanel("PCA", 
                         
                         
-                        h3("Principal Component Analysis of Diet from a Health Perspective in the Chosen Country", 
+                        h3("Principal Component Analysis of mortality", 
                            style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
                         
                         sidebarLayout(
@@ -725,6 +725,10 @@ fluidPage(
                
                
                tabPanel("Health data Vizualisation",
+                        
+                        h3("visualization of mortality reduction percentages", 
+                           style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                        
                         sidebarLayout(
                           sidebarPanel(
                             width = 3,

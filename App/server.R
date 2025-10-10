@@ -231,7 +231,7 @@ server <- function(input, output, session) {
     
     # ---- HEALTH DATA TABLE ----
     output$datatable_sante <- DT::renderDataTable({
-      print.health(sante_new)
+      print.health(sante)
     })
 
   # ---- PCA HEALTH DATA ----

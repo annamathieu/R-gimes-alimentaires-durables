@@ -130,5 +130,7 @@ names(colors.scenario) = c("ani-100", "ani-25", "ani-50", "ani-75",
                            "kcal-50" , "kcal-75", 
                            "PSC", "VEG", "VGN") 
 
-
-
+sante <- sante_new
+sante$parameter <- as.character(sante$parameter)
+sante$parameter[sante$parameter == "%deaths_avd_prm/all"] <- "prc_deaths_avd_prm_all"
+sante$parameter <- as.factor(sante$parameter)

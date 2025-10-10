@@ -8,6 +8,8 @@ print.health <- function(data) {
   num_cols <- sapply(data, is.numeric)
   data[, num_cols] <- round(data[, num_cols], 0)
   
+  data
+  
   datatable(
     data,
     options = list(
