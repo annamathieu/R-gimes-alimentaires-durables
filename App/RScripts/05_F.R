@@ -12,7 +12,7 @@ print.health <- function(data) {
     data,
     options = list(
       scrollX = TRUE,        # défilement horizontal si beaucoup de colonnes
-      pageLength = 10,       # nb de lignes par page
+      #pageLength = 5,       # nb de lignes par page
       autoWidth = TRUE,
       lengthMenu = c(5, 20, 50, 100)
     ),
