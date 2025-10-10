@@ -634,9 +634,48 @@ fluidPage(
                         )
                ),
                
-               tabPanel("PCA",
-                        plotOutput("acp_env_plot", height = "700px")
-               ),
+               tabPanel("PCA", 
+                        
+                        
+                        h3("Principal Component Analysis of Diet from a Health Perspective in the Chosen Country", 
+                           style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                        
+                        sidebarLayout(
+                          sidebarPanel(   # side bar dans
+                            width = 2,
+                            h3("Use this tool choose a country"),
+                            
+                            pickerInput(
+                              inputId = "country_pca_health",
+                              label = "Country",
+                              choices = sort(unique(sante_new$code_pays)),
+                              selected = "FRP",
+                              options = pickerOptions(
+                                actionsBox = TRUE,
+                                liveSearch = TRUE,
+                                noneSelectedText = "Select a country",
+                                size = 5
+                              ),
+                              multiple = FALSE  # plusieurs colonnes possibles
+                            )),
+                          
+                          mainPanel (
+                            tabPanel("PCA", 
+                                     fluidRow(
+                                       column(
+                                         width = 6,
+                                         plotOutput("plot1_h", height = "600px", width = "100%")
+                                       ),
+                                       column(
+                                         width = 6,
+                                         plotOutput("plot2_h", height = "600px", width = "100%")
+                                       )
+                                     )), 
+                            width = 9,
+                            
+                            
+                          )
+                        )),
                
                
                tabPanel("Health data Vizualisation",
@@ -773,5 +812,6 @@ fluidPage(
   
   
   
+
 
 
