@@ -95,7 +95,8 @@ source("RScripts/03_n.R")     # fct PCA ENV
 source("RScripts/04_n.R")     # fct PCA ENV
 source("RScripts/06_n.R")     # fct MFA
 source("RScripts/05_F.R")     # fct PRINT HEALTH
-source("RScripts/07_F.R")     # fct HEALTH 
+source("RScripts/07_F.R")     # fct PLOT HEALTH 
+source("RScripts/08_F.R")     # fct PCA HEALTH 
  
 
 #####----------------------------------------------------------------------#####
