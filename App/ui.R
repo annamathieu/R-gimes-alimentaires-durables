@@ -491,7 +491,7 @@ fluidPage(
                        tags$p("Item :"),
                        tags$ul(
                          tags$li("abs : value in units"),
-                         tags$li("% rec : nutrient coverage in %, from nutritional recommendation"),
+                         tags$li("chg : absolute change compared to BMK"),
                          tags$li("pct : % of change from BMK")
                        ),
                        
@@ -545,6 +545,9 @@ fluidPage(
                  
                  
                  tabPanel("Environmental data Vizualisation",
+                          h3("Visualize differences in environmental impacts of diets in chosen country", 
+                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                          
                           sidebarLayout(
                             sidebarPanel(
                               width = 3,
