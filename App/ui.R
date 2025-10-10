@@ -628,13 +628,56 @@ fluidPage(
              
              tabsetPanel(
                tabPanel("Data Manipulation",
-                        fluidRow(
-                          column(
-                            width = 12,
-                            style = "padding-left:40px; padding-right:40px;",
-                            DTOutput("datatable_sante", width = "100%")
+                        
+                        h3("Explore health dataset", 
+                           style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                        
+                        sidebarLayout(
+                          sidebarPanel(   # side bar dans
+                            width = 3,
+                            h3("Use this tool bar to navigate through health data"),
+                            
+                            tags$br(),
+                            tags$p("How to navigate data :"),
+                            tags$p("Parameter : "),
+                            tags$ul(
+                              tags$li(tags$strong("deaths_avd"), ": number of avoided deaths (in thousands)"),
+                              tags$li(tags$strong("deaths_avd_prm"), ": avoided premature deaths (in thousands)"),
+                              tags$li(tags$strong("%deaths_avd_prm/all"), ": percentage change in premature mortality")
+                            ),
+                            tags$p("Disease :"),
+                            tags$ul(
+                              tags$li(tags$strong("CHD"), ": Coronary Heart Disease"),
+                              tags$li(tags$strong("Stroke")),
+                              tags$li(tags$strong("T2DM"), ": Type 2 Diabetes Mellitus"),
+                              tags$li(tags$strong("Cancer")),
+                              tags$li(tags$strong("Other"), ": other causes of death"),
+                              tags$li(tags$strong("All-c"), ": aggregate of all causes")
+                            ),
+                            tags$p("Risk factor:"),
+                            tags$ul(
+                              tags$li("Low consumption of: ", tags$strong("vegetables, fruits, legumes, nuts & seeds, fish")),
+                              tags$li("High consumption of: red and processed meat ", tags$strong("(r+p_meat)")),
+                              tags$li("Body weight: ", tags$strong("underweight, overweight, obesity"))
+                            ),
+                            tags$p("Diet Scenario :"),
+                            tags$ul(
+                              tags$li("ani-25 => ani-100: replacement of 25–100% of animal-source foods with plant-based foods"),
+                              tags$li("kcal-25 => kcal-100: improvement of weight imbalances (underweight, overweight, obesity) by 25–100%"),
+                              tags$li("FLX: Flexitarian, PSC: Pescovegetarian, VEG: Vegetarian, VGN: Vegan")
+                            ) 
+                            
+                          ),
+                          
+                          
+                          
+                          mainPanel (
+                            width = 9,
+                            DTOutput("datatable_sante")
+                            )
+                            
+                            
                           )
-                        )
                ),
                
                tabPanel("PCA", 

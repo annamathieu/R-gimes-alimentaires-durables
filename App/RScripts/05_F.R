@@ -12,9 +12,9 @@ print.health <- function(data) {
     data,
     options = list(
       scrollX = TRUE,        # défilement horizontal si beaucoup de colonnes
-      pageLength = 10,       # nb de lignes par page
+      #pageLength = 5,       # nb de lignes par page
       autoWidth = TRUE,
-      lengthMenu = c(10, 20, 50, 100)
+      lengthMenu = c(5, 20, 50, 100)
     ),
     rownames = FALSE,
     filter = "top",          # ajout d’un filtre interactif en haut des colonnes
