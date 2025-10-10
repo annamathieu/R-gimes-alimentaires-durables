@@ -43,7 +43,7 @@ env_partition <- function(domains = c("GHGe", "land", "water", "nitr", "phos"), 
   }
   
   # --- Construire le titre avec le nom complet du pays ---
-  title <- paste0("Comparaison du % de changement de chaque indicateur environnemental par régime alimentaire en ", nom_pays_affiche)
+  title <- paste0("% Change in Environmental Indicators by Diet Scenario")
   
   
   # palette simple si colors.scenario n’existe pas

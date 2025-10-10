@@ -545,6 +545,9 @@ fluidPage(
                  
                  
                  tabPanel("Environmental data Vizualisation",
+                          h3("Visualize differences in environmental impacts of diets in chosen country", 
+                             style = "text-align:center; font-weight:bold; margin-bottom:20px;"),
+                          
                           sidebarLayout(
                             sidebarPanel(
                               width = 3,
