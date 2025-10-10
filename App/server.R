@@ -233,6 +233,22 @@ server <- function(input, output, session) {
     output$datatable_sante <- DT::renderDataTable({
       print.health(sante_new)
     })
+
+  # ---- PCA HEALTH DATA ----
+    sel_country_h <- reactive ({
+      req(input$country_pca_health)
+      
+      pca.disease(data_disease, 
+                country=input$country_pca_health)
+    })
+    
+    output$plot1_h <- renderPlot({
+      sel_country_h()[[1]] 
+    })
+    
+    output$plot2_h <- renderPlot({
+      sel_country_h()[[2]] 
+    })
     
     
     ###############################################################
