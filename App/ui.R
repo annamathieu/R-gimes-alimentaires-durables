@@ -491,7 +491,7 @@ fluidPage(
                        tags$p("Item :"),
                        tags$ul(
                          tags$li("abs : value in units"),
-                         tags$li("% rec : nutrient coverage in %, from nutritional recommendation"),
+                         tags$li("chg : absolute change compared to BMK"),
                          tags$li("pct : % of change from BMK")
                        ),
                        
